@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TB01</string>
     <string name="tv_home">Makan apa hari ini?</string>
+    <string name="title_home">Makan Apa</string>
+    <string name="btn_cari">Cari</string>
+    <string name="header_menu">Menu</string>
 </resources>
