@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         //Bikin custom ActionBar
         this.setSupportActionBar(this.binding.toolbar)
         //Tombol Garis Tiga
-        val toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.open_drawer, R.string.close_drawer)
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.open_drawer, R.string.close_drawer)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
     }
