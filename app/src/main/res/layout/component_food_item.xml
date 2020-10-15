@@ -10,7 +10,7 @@
     android:gravity="center"
     >
     <TextView
-        android:id="@+id/tv_menu_text"
+        android:id="@+id/tv_food_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tv_food_item_text"

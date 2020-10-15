@@ -1,6 +1,7 @@
 package com.pppb.tb01.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,10 +41,13 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val listener: 
         fun updateView(menu: Menu) {
             this.binding.tvMenuText.text = menu.getName()
 
-            this.binding.foodList.setOnClickListener{
+            this.binding.menuList.setOnClickListener{
                 when(menu.getId()) {
-                    1 -> this.listener.changePage(1)
-                    2 -> this.listener.changePage(2)
+                    1 -> Log.d("DEBUG", "BTN CLICK")
+                    2 -> Log.d("DEBUG", "BTN CLICK")
+                    else -> {
+                        Log.d("DEBUG", "BTN CLICK")
+                    }
                 }
                 this.listener.closeDrawer()
             }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     >
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fb_addMenu"
+        android:id="@+id/fb_add_food"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -17,7 +17,7 @@
         android:src="@drawable/icon_plus"
         />
     <ListView
-        android:id="@+id/lv_listMenu"
+        android:id="@+id/lv_list_food"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
