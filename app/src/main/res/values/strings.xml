@@ -4,4 +4,9 @@
     <string name="title_home">Makan Apa</string>
     <string name="btn_cari">Cari</string>
     <string name="header_menu">Menu</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="Tag">Tag</string>
+    <string name="Bahan">Bahan</string>
+    <string name="Langkah">Langkah Memasak : </string>
+    <string name="Resto">Tersedia di resto :</string>
 </resources>
