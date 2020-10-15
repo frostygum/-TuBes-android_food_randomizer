@@ -7,10 +7,12 @@ import androidx.fragment.app.FragmentTransaction
 import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.FoodListFragment
 import com.pppb.tb01.fragment.FragmentListener
+import com.pppb.tb01.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), FragmentListener {
     private lateinit var binding : ActivityMainBinding
+    private val homeFragment: HomeFragment = HomeFragment.newInstance()
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,15 +40,26 @@ class MainActivity : AppCompatActivity(), FragmentListener {
 
         when (pageNumber) {
             1 -> {
+                if (this.homeFragment.isAdded) {
+                    ft.show(this.homeFragment)
+                } else {
+                    ft.add(container, this.homeFragment)
+                }
+
+                if (this.foodListFragment.isAdded) {
+                    ft.hide(this.foodListFragment)
+                }
+            }
+            2 -> {
                 if (this.foodListFragment.isAdded) {
                     ft.show(this.foodListFragment)
                 } else {
-                    ft.add(container, this.foodListFragment)
+                    ft.add(container, this.foodListFragment).addToBackStack(null)
                 }
 
-                //if (this.secondFragment.isAdded) {
-                //    ft.hide(this.secondFragment)
-                //}
+                if (this.homeFragment.isAdded) {
+                    ft.hide(this.homeFragment)
+                }
             }
             else -> {
                 TODO("no main fragment")
