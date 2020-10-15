@@ -20,7 +20,7 @@
                 android:text="menu"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:paddingVertical="15dp"
+                android:paddingVertical="10dp"
                 android:background="@color/colorAccent"
                 />
             <TextView
