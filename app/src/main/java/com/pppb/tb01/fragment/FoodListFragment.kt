@@ -58,7 +58,6 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.binding.lvListFood.adapter = adapter
 
         this.binding.fbAddFood.setOnClickListener{
-            viewModel.addFood(Food("food fb", ""))
             this.listener.changePage(3)
         }
 

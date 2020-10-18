@@ -37,12 +37,28 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         } ?: throw Exception("Invalid Activity")
 
         this.binding.btnAdd.setOnClickListener{
-            viewModel.addFood(Food("this is new food", ""))
+            val newFood = Food(this.binding.etAddFoodName.text.toString(), this.binding.etAddFoodDesc.text.toString())
+            newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().split("\n"))
+            newFood.setTags(this.binding.etAddFoodTags.text.toString().split("\n"))
+            newFood.setSteps(this.binding.etAddFoodSteps.text.toString().split("\n"))
+            newFood.setRestaurants(this.binding.etAddFoodRestaurants.text.toString().split("\n"))
+
+            viewModel.addFood(newFood)
+            resetForm(this.binding)
+            listener.changePage(2)
         }
 
         return this.binding.root
     }
 
+    private fun resetForm(binding: FragmentAddFoodBinding) {
+        binding.etAddFoodDesc.setText("")
+        binding.etAddFoodName.setText("")
+        binding.etAddFoodIngredients.setText("")
+        binding.etAddFoodRestaurants.setText("")
+        binding.etAddFoodSteps.setText("")
+        binding.etAddFoodTags.setText("")
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

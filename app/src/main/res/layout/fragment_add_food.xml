@@ -6,31 +6,37 @@
     android:orientation="vertical"
     >
     <EditText
+        android:id="@+id/et_addFood_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_addFood_hint_name"
         />
     <EditText
+        android:id="@+id/et_addFood_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_addFood_hint_desc"
         />
     <EditText
+        android:id="@+id/et_addFood_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_addFood_hint_tags"
         />
     <EditText
+        android:id="@+id/et_addFood_ingredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_addFood_hint_ingredients"
         />
     <EditText
+        android:id="@+id/et_addFood_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_addFood_hint_steps"
         />
     <EditText
+        android:id="@+id/et_addFood_restaurants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_addFood_hint_restaurants"
