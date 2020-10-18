@@ -16,4 +16,14 @@
 
     <string name="tv_menu_item_text">Menu title</string>
     <string name="tv_food_item_text">Food name</string>
+
+    <!--  Add Food Layout  -->
+    <string name="et_addFood_hint_name">Food Name</string>
+    <string name="et_addFood_hint_desc">Descriptions</string>
+    <string name="et_addFood_hint_tags">Tags</string>
+    <string name="et_addFood_hint_ingredients">Ingredients</string>
+    <string name="et_addFood_hint_steps">Steps</string>
+    <string name="et_addFood_hint_restaurants">Restaurants</string>
+    <string name="btn_addFood_update">Update</string>
+
 </resources>

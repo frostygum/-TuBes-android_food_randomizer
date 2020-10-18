@@ -10,7 +10,7 @@ import com.pppb.tb01.fragment.FragmentListener
 import com.pppb.tb01.model.Food
 
 class FoodListAdapter(context: Context, data: List<Food>, private val listener: FragmentListener) : ArrayAdapter<Food>(context, 0, data) {
-    private val foodList: List<Food> = data
+    private var foodList: List<Food> = data
     private val view: Context = context
 
     override fun getItem(position: Int): Food {
@@ -32,6 +32,11 @@ class FoodListAdapter(context: Context, data: List<Food>, private val listener: 
         viewHolder.updateView(this.getItem(position))
 
         return itemView
+    }
+
+    fun update(foods: List<Food>) {
+        this.foodList = foods
+        this.notifyDataSetChanged()
     }
 
     private class ViewHolder(view: View, private val listener: FragmentListener) {

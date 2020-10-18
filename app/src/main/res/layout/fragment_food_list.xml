@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBackgorund"
     >
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_add_food"
@@ -13,7 +14,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/icon_plus"
         />
     <ListView
