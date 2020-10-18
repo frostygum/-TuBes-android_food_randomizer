@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), FragmentListener {
     private val homeFragment: HomeFragment = HomeFragment.newInstance()
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
-
     private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {

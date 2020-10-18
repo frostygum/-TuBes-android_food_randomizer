@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.adapter.FoodListAdapter
@@ -17,7 +18,7 @@ import java.lang.ClassCastException
 class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     private lateinit var binding: FragmentFoodListBinding
     private lateinit var listener: FragmentListener
-    private lateinit var foodListViewModel: FoodListViewModel
+    private lateinit var viewModel: FoodListViewModel
 
     companion object {
         fun newInstance(): FoodListFragment {
@@ -31,9 +32,12 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         savedInstanceState: Bundle?
     ): View? {
         this.binding = FragmentFoodListBinding.inflate(inflater, container, false)
-        this.foodListViewModel = ViewModelProvider(this).get(FoodListViewModel::class.java)
 
-        val foods = this.foodListViewModel.getFoods().value
+        viewModel = activity?.run {
+            ViewModelProvider(this).get(FoodListViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
+        val foods = viewModel.getFoods().value
         val adapter: FoodListAdapter
 
         adapter = if(foods != null) {
@@ -42,9 +46,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
             FoodListAdapter(activity!!, listOf(), this.listener)
         }
 
-        this.binding.lvListFood.adapter = adapter
-
-        this.foodListViewModel.getFoods().observe(viewLifecycleOwner, {
+        viewModel.getFoods().observe(viewLifecycleOwner, {
             if(it != null) {
                 adapter.update(it)
             }
@@ -53,8 +55,10 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
             }
         })
 
+        this.binding.lvListFood.adapter = adapter
+
         this.binding.fbAddFood.setOnClickListener{
-            this.foodListViewModel.addFood(Food("food fb", ""))
+            viewModel.addFood(Food("food fb", ""))
             this.listener.changePage(3)
         }
 

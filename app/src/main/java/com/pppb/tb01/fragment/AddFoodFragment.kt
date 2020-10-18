@@ -17,6 +17,7 @@ import java.lang.ClassCastException
 class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     private lateinit var binding: FragmentAddFoodBinding
     private lateinit var listener: FragmentListener
+    private lateinit var viewModel: FoodListViewModel
 
     companion object {
         fun newInstance(): AddFoodFragment {
@@ -31,10 +32,12 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     ): View? {
         this.binding = FragmentAddFoodBinding.inflate(inflater, container, false)
 
+        viewModel = activity?.run {
+            ViewModelProvider(this).get(FoodListViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
         this.binding.btnAdd.setOnClickListener{
-            val foodListViewModel = ViewModelProvider(this).get(FoodListViewModel::class.java)
-            foodListViewModel.addFood(Food("food from other fragment", ""))
-            Log.d("Debug", "click")
+            viewModel.addFood(Food("this is new food", ""))
         }
 
         return this.binding.root
