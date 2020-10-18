@@ -9,6 +9,10 @@ class FoodListViewModel(): ViewModel() {
     private val foodList: MutableList<Food> = mutableListOf()
     private val foods: MutableLiveData<List<Food>> = MutableLiveData<List<Food>>()
 
+    init {
+        this.update()
+    }
+
     fun getFoods() = foods as LiveData<List<Food>>
 
     fun addFood(food: Food) {

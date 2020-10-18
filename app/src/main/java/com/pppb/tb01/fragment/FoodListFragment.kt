@@ -18,7 +18,7 @@ import java.lang.ClassCastException
 class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     private lateinit var binding: FragmentFoodListBinding
     private lateinit var listener: FragmentListener
-    private lateinit var viewModel: FoodListViewModel
+    private lateinit var foodListViewModel: FoodListViewModel
 
     companion object {
         fun newInstance(): FoodListFragment {
@@ -33,11 +33,11 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     ): View? {
         this.binding = FragmentFoodListBinding.inflate(inflater, container, false)
 
-        viewModel = activity?.run {
+        foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val foods = viewModel.getFoods().value
+        val foods = foodListViewModel.getFoods().value
         val adapter: FoodListAdapter
 
         adapter = if(foods != null) {
@@ -46,7 +46,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
             FoodListAdapter(activity!!, listOf(), this.listener)
         }
 
-        viewModel.getFoods().observe(viewLifecycleOwner, {
+        foodListViewModel.getFoods().observe(viewLifecycleOwner, {
             if(it != null) {
                 adapter.update(it)
             }
