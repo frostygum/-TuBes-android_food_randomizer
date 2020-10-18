@@ -13,7 +13,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/colorPrimary"
         android:src="@drawable/icon_plus"
         />
     <ListView

@@ -39,15 +39,24 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.binding = FragmentFoodListBinding.inflate(inflater, container, false)
         this.foodListViewModel = ViewModelProvider(this).get(FoodListViewModel::class.java)
 
-        this.foodListViewModel.getFoods().observe(viewLifecycleOwner, Observer { foods ->
-            var foodList: List<Food> = listOf()
+        val foods = this.foodListViewModel.getFoods().value
+        val adapter: FoodListAdapter
 
-            foods.forEach { food ->
-                foodList += food
+        adapter = if(foods != null) {
+            FoodListAdapter(activity!!, foods, this.listener)
+        } else {
+            FoodListAdapter(activity!!, listOf(), this.listener)
+        }
+
+        this.binding.lvListFood.adapter = adapter
+
+        this.foodListViewModel.getFoods().observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                adapter.update(it)
             }
-
-            val adapter = FoodListAdapter(activity!!, foodList, this.listener)
-            this.binding.lvListFood.adapter = adapter
+            else {
+                adapter.update(listOf())
+            }
         })
 
         this.binding.fbAddFood.setOnClickListener{

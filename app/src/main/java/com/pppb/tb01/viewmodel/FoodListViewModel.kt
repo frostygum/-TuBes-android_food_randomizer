@@ -12,7 +12,7 @@ class FoodListViewModel(): ViewModel() {
     init {
         for(i in 1 .. 10) {
             val food = Food("nama food ke $i", "ini description untuk food ke $i")
-            foodList.add(food)
+            addFood(food)
         }
         this.update()
     }
