@@ -17,49 +17,55 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="menu"
+                android:text="@string/header_menu"
                 android:gravity="center"
                 android:textSize="20sp"
+                android:id="@+id/tv_menu_title"
                 android:paddingVertical="10dp"
                 android:background="@color/colorAccent"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="descriptions"
+                android:text="@string/deskripsi"
                 android:textSize="15sp"
+                android:id="@+id/tv_desc"
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tags"
+                android:text="@string/Tag"
                 android:textSize="15sp"
+                android:id="@+id/tv_tags"
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="bahan"
+                android:text="@string/Bahan"
                 android:textSize="15sp"
+                android:id="@+id/tv_bahan"
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="langkah"
+                android:text="@string/Langkah"
                 android:textSize="15sp"
+                android:id="@+id/tv_langkah"
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="resto"
+                android:text="@string/Resto"
                 android:textSize="15sp"
+                android:id="@+id/tv_resto"
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="10dp"
                 />
