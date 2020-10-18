@@ -14,6 +14,7 @@ import com.pppb.tb01.fragment.FoodListFragment
 import com.pppb.tb01.fragment.FragmentListener
 import com.pppb.tb01.fragment.HomeFragment
 import com.pppb.tb01.viewmodel.FoodListViewModel
+import com.pppb.tb01.viewmodel.PageViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -24,11 +25,15 @@ class MainActivity : AppCompatActivity(), FragmentListener {
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
     private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment)
+    //viewModel
+    private lateinit var pageViewModel: PageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
+
+        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java)
 
         //Bikin custom ActionBar
         this.setSupportActionBar(this.binding.toolbar)
@@ -43,7 +48,9 @@ class MainActivity : AppCompatActivity(), FragmentListener {
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        changePage(1)
+        pageViewModel.getPage().observe(this, {
+            changePage(it)
+        })
     }
 
     override fun closeDrawer() {

@@ -12,12 +12,14 @@ import com.pppb.tb01.R
 import com.pppb.tb01.databinding.FragmentAddFoodBinding
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
+import com.pppb.tb01.viewmodel.PageViewModel
 import java.lang.ClassCastException
 
 class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     private lateinit var binding: FragmentAddFoodBinding
     private lateinit var listener: FragmentListener
     private lateinit var foodListViewModel: FoodListViewModel
+    private lateinit var pageViewModel: PageViewModel
 
     companion object {
         fun newInstance(): AddFoodFragment {
@@ -36,6 +38,10 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        pageViewModel = activity?.run {
+            ViewModelProvider(this).get(PageViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
         this.binding.btnAdd.setOnClickListener{
             val newFood = Food(this.binding.etAddFoodName.text.toString(), this.binding.etAddFoodDesc.text.toString())
             newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().split("\n"))
@@ -45,7 +51,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
 
             foodListViewModel.addFood(newFood)
             resetForm(this.binding)
-            listener.changePage(2)
+            pageViewModel.changePage(2)
         }
 
         return this.binding.root

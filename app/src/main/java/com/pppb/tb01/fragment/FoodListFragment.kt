@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.adapter.FoodListAdapter
 import com.pppb.tb01.databinding.FragmentFoodListBinding
-import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
+import com.pppb.tb01.viewmodel.PageViewModel
 import java.lang.ClassCastException
 
 class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     private lateinit var binding: FragmentFoodListBinding
     private lateinit var listener: FragmentListener
     private lateinit var foodListViewModel: FoodListViewModel
+    private lateinit var pageViewModel: PageViewModel
 
     companion object {
         fun newInstance(): FoodListFragment {
@@ -35,6 +35,10 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
 
         foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
+        pageViewModel = activity?.run {
+            ViewModelProvider(this).get(PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val foods = foodListViewModel.getFoods().value
@@ -58,7 +62,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.binding.lvListFood.adapter = adapter
 
         this.binding.fbAddFood.setOnClickListener{
-            this.listener.changePage(3)
+            pageViewModel.changePage(3)
         }
 
         return this.binding.root
