@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.databinding.FragmentHomeBinding
+import com.pppb.tb01.viewmodel.PageViewModel
 import java.lang.ClassCastException
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var listener: FragmentListener
+    private lateinit var pageViewModel: PageViewModel
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -27,22 +29,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     ): View? {
         this.binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        pageViewModel = activity?.run {
+            ViewModelProvider(this).get(PageViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
         this.binding.btnHomeCari.setOnClickListener {
-            this.listener.changePage(2)
+            pageViewModel.changePage(2)
         }
 
         return this.binding.root
-    }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        if(context is FragmentListener) {
-            this.listener = context
-        }
-        else {
-            throw ClassCastException("$context must implement FragmentListener")
-        }
     }
 }
