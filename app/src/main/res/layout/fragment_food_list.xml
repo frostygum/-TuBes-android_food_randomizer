@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBackgorund"
     >
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_add_food"

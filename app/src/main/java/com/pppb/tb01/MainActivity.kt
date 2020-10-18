@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.databinding.ActivityMainBinding
+import com.pppb.tb01.fragment.AddFoodFragment
 import com.pppb.tb01.fragment.FoodListFragment
 import com.pppb.tb01.fragment.FragmentListener
 import com.pppb.tb01.fragment.HomeFragment
@@ -21,8 +22,9 @@ class MainActivity : AppCompatActivity(), FragmentListener {
     //fragments
     private val homeFragment: HomeFragment = HomeFragment.newInstance()
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
+    private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
 
-    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment)
+    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

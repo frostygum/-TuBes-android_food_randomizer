@@ -2,21 +2,15 @@ package com.pppb.tb01.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.adapter.FoodListAdapter
-import com.pppb.tb01.adapter.MenuListAdapter
-import com.pppb.tb01.databinding.FragmentDrawerLeftBinding
 import com.pppb.tb01.databinding.FragmentFoodListBinding
 import com.pppb.tb01.model.Food
-import com.pppb.tb01.model.Menu
 import com.pppb.tb01.viewmodel.FoodListViewModel
 import java.lang.ClassCastException
 
@@ -50,7 +44,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
 
         this.binding.lvListFood.adapter = adapter
 
-        this.foodListViewModel.getFoods().observe(viewLifecycleOwner, Observer {
+        this.foodListViewModel.getFoods().observe(viewLifecycleOwner, {
             if(it != null) {
                 adapter.update(it)
             }
@@ -60,7 +54,8 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         })
 
         this.binding.fbAddFood.setOnClickListener{
-            this.foodListViewModel.addFood(Food("Custom Add Food", "This is Custom added food desc"))
+            this.foodListViewModel.addFood(Food("food fb", ""))
+            this.listener.changePage(3)
         }
 
         return this.binding.root
