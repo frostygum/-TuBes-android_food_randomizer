@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.adapter.FoodListAdapter
 import com.pppb.tb01.databinding.FragmentFoodListBinding
-import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
+import com.pppb.tb01.viewmodel.PageViewModel
 import java.lang.ClassCastException
 
 class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     private lateinit var binding: FragmentFoodListBinding
     private lateinit var listener: FragmentListener
-    private lateinit var viewModel: FoodListViewModel
+    private lateinit var foodListViewModel: FoodListViewModel
+    private lateinit var pageViewModel: PageViewModel
 
     companion object {
         fun newInstance(): FoodListFragment {
@@ -33,11 +33,15 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     ): View? {
         this.binding = FragmentFoodListBinding.inflate(inflater, container, false)
 
-        viewModel = activity?.run {
+        foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val foods = viewModel.getFoods().value
+        pageViewModel = activity?.run {
+            ViewModelProvider(this).get(PageViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
+        val foods = foodListViewModel.getFoods().value
         val adapter: FoodListAdapter
 
         adapter = if(foods != null) {
@@ -46,7 +50,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
             FoodListAdapter(activity!!, listOf(), this.listener)
         }
 
-        viewModel.getFoods().observe(viewLifecycleOwner, {
+        foodListViewModel.getFoods().observe(viewLifecycleOwner, {
             if(it != null) {
                 adapter.update(it)
             }
@@ -58,8 +62,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.binding.lvListFood.adapter = adapter
 
         this.binding.fbAddFood.setOnClickListener{
-            viewModel.addFood(Food("food fb", ""))
-            this.listener.changePage(3)
+            pageViewModel.changePage(3)
         }
 
         return this.binding.root

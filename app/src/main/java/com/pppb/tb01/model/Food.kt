@@ -13,6 +13,26 @@ class Food(name: String, desc: String) {
         this.descriptions  = desc
     }
 
+    fun setDescriptions(desc: String) {
+        this.descriptions = desc
+    }
+
+    fun setTags(tags: List<String>) {
+        this.tags = tags
+    }
+
+    fun setIngredients(ingredients: List<String>) {
+        this.ingredients = ingredients
+    }
+
+    fun setSteps(steps: List<String>) {
+        this.steps = steps
+    }
+
+    fun setRestaurants(restaurants: List<String>) {
+        this.restaurants = restaurants
+    }
+
     fun addTag(tag: String) {
         this.tags.plus(tag)
     }

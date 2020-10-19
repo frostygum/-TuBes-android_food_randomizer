@@ -12,12 +12,14 @@ import com.pppb.tb01.R
 import com.pppb.tb01.databinding.FragmentAddFoodBinding
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
+import com.pppb.tb01.viewmodel.PageViewModel
 import java.lang.ClassCastException
 
 class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     private lateinit var binding: FragmentAddFoodBinding
     private lateinit var listener: FragmentListener
-    private lateinit var viewModel: FoodListViewModel
+    private lateinit var foodListViewModel: FoodListViewModel
+    private lateinit var pageViewModel: PageViewModel
 
     companion object {
         fun newInstance(): AddFoodFragment {
@@ -32,17 +34,37 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     ): View? {
         this.binding = FragmentAddFoodBinding.inflate(inflater, container, false)
 
-        viewModel = activity?.run {
+        foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        pageViewModel = activity?.run {
+            ViewModelProvider(this).get(PageViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
         this.binding.btnAdd.setOnClickListener{
-            viewModel.addFood(Food("this is new food", ""))
+            val newFood = Food(this.binding.etAddFoodName.text.toString(), this.binding.etAddFoodDesc.text.toString())
+            newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().split("\n"))
+            newFood.setTags(this.binding.etAddFoodTags.text.toString().split("\n"))
+            newFood.setSteps(this.binding.etAddFoodSteps.text.toString().split("\n"))
+            newFood.setRestaurants(this.binding.etAddFoodRestaurants.text.toString().split("\n"))
+
+            foodListViewModel.addFood(newFood)
+            resetForm(this.binding)
+            pageViewModel.changePage(2)
         }
 
         return this.binding.root
     }
 
+    private fun resetForm(binding: FragmentAddFoodBinding) {
+        binding.etAddFoodDesc.setText("")
+        binding.etAddFoodName.setText("")
+        binding.etAddFoodIngredients.setText("")
+        binding.etAddFoodRestaurants.setText("")
+        binding.etAddFoodSteps.setText("")
+        binding.etAddFoodTags.setText("")
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

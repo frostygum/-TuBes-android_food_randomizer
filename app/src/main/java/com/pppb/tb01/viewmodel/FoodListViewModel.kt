@@ -10,10 +10,6 @@ class FoodListViewModel(): ViewModel() {
     private val foods: MutableLiveData<List<Food>> = MutableLiveData<List<Food>>()
 
     init {
-        for(i in 1 .. 10) {
-            val food = Food("nama food ke $i", "ini description untuk food ke $i")
-            addFood(food)
-        }
         this.update()
     }
 
