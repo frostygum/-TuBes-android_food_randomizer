@@ -9,7 +9,7 @@ import com.pppb.tb01.databinding.ComponentFoodItemBinding
 import com.pppb.tb01.fragment.FragmentListener
 import com.pppb.tb01.model.Food
 
-class FoodListAdapter(context: Context, data: List<Food>, private val listener: FragmentListener) : ArrayAdapter<Food>(context, 0, data) {
+class FoodListAdapter(context: Context, data: List<Food>) : ArrayAdapter<Food>(context, 0, data) {
     private var foodList: List<Food> = data
     private val view: Context = context
 
@@ -22,7 +22,7 @@ class FoodListAdapter(context: Context, data: List<Food>, private val listener: 
 
         if (convertView == null) {
             itemView = ComponentFoodItemBinding.inflate(LayoutInflater.from(this.view)).root
-            viewHolder = ViewHolder(itemView, listener)
+            viewHolder = ViewHolder(itemView)
             itemView.tag = viewHolder
         } else {
             itemView = convertView
@@ -39,7 +39,7 @@ class FoodListAdapter(context: Context, data: List<Food>, private val listener: 
         this.notifyDataSetChanged()
     }
 
-    private class ViewHolder(view: View, private val listener: FragmentListener) {
+    private class ViewHolder(view: View) {
         private val binding: ComponentFoodItemBinding = ComponentFoodItemBinding.bind(view)
 
         fun updateView(food: Food) {

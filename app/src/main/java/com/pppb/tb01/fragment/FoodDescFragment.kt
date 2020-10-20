@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.pppb.tb01.R
 import com.pppb.tb01.databinding.FragmentFoodDescBinding
 
-
 class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
     private lateinit var binding: FragmentFoodDescBinding
 

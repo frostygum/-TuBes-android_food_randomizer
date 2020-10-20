@@ -17,7 +17,6 @@ import java.lang.ClassCastException
 
 class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     private lateinit var binding: FragmentAddFoodBinding
-    private lateinit var listener: FragmentListener
     private lateinit var foodListViewModel: FoodListViewModel
     private lateinit var pageViewModel: PageViewModel
 
@@ -64,16 +63,5 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         binding.etAddFoodRestaurants.setText("")
         binding.etAddFoodSteps.setText("")
         binding.etAddFoodTags.setText("")
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        if(context is FragmentListener) {
-            this.listener = context
-        }
-        else {
-            throw ClassCastException("$context must implement FragmentListener")
-        }
     }
 }

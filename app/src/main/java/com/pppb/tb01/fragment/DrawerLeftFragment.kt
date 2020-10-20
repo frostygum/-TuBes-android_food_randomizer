@@ -40,8 +40,4 @@ class DrawerLeftFragment(): Fragment() {
 
         return binding.root
     }
-
-    fun closeDrawer() {
-        drawer_layout.closeDrawers()
-    }
 }

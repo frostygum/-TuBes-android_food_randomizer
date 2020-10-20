@@ -26,4 +26,12 @@
     <string name="et_addFood_hint_restaurants">Restaurants</string>
     <string name="btn_addFood_update">Update</string>
 
+    <string name="settingTitle">Setting</string>
+    <string name="themeSet">Theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+
+    <string name="search">Search</string>
+
+
 </resources>

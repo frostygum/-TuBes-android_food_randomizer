@@ -1,6 +1,5 @@
 package com.pppb.tb01.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.databinding.FragmentHomeBinding
 import com.pppb.tb01.viewmodel.PageViewModel
-import java.lang.ClassCastException
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding

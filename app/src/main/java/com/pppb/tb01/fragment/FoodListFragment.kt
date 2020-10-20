@@ -1,6 +1,5 @@
 package com.pppb.tb01.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,9 @@ import com.pppb.tb01.adapter.FoodListAdapter
 import com.pppb.tb01.databinding.FragmentFoodListBinding
 import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
-import java.lang.ClassCastException
 
 class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     private lateinit var binding: FragmentFoodListBinding
-    private lateinit var listener: FragmentListener
     private lateinit var foodListViewModel: FoodListViewModel
     private lateinit var pageViewModel: PageViewModel
 
@@ -45,9 +42,9 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         val adapter: FoodListAdapter
 
         adapter = if(foods != null) {
-            FoodListAdapter(activity!!, foods, this.listener)
+            FoodListAdapter(activity!!, foods)
         } else {
-            FoodListAdapter(activity!!, listOf(), this.listener)
+            FoodListAdapter(activity!!, listOf())
         }
 
         foodListViewModel.getFoods().observe(viewLifecycleOwner, {
@@ -66,16 +63,5 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         }
 
         return this.binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        if(context is FragmentListener) {
-            this.listener = context
-        }
-        else {
-            throw ClassCastException("$context must implement FragmentListener")
-        }
     }
 }
