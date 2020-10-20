@@ -3,26 +3,23 @@ package com.pppb.tb01
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.databinding.ActivityMainBinding
-import com.pppb.tb01.fragment.AddFoodFragment
-import com.pppb.tb01.fragment.FoodListFragment
-import com.pppb.tb01.fragment.FragmentListener
-import com.pppb.tb01.fragment.HomeFragment
+import com.pppb.tb01.fragment.*
 import com.pppb.tb01.viewmodel.PageViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), FragmentListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     //fragments
     private val homeFragment: HomeFragment = HomeFragment.newInstance()
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
-    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment)
+    private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
+    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment)
     //viewModel
     private lateinit var pageViewModel: PageViewModel
 

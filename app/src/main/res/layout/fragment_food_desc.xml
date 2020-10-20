@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBackground"
     >
     <ScrollView
         android:layout_width="match_parent"
@@ -11,7 +12,7 @@
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             >
             <TextView
@@ -23,6 +24,7 @@
                 android:id="@+id/tv_menu_title"
                 android:paddingVertical="10dp"
                 android:background="@color/colorAccent"
+                android:textStyle="bold"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -38,8 +40,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Tag"
                 android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
                 android:id="@+id/tv_tags"
-                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
@@ -47,8 +57,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Bahan"
                 android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
                 android:id="@+id/tv_bahan"
-                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
@@ -56,8 +74,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Langkah"
                 android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
                 android:id="@+id/tv_langkah"
-                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="5dp"
                 android:paddingHorizontal="10dp"
                 />
             <TextView
@@ -65,8 +91,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Resto"
                 android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
                 android:id="@+id/tv_resto"
-                android:layout_marginVertical="5dp"
+                android:layout_marginBottom="5dp"
                 android:paddingHorizontal="10dp"
                 />
         </LinearLayout>

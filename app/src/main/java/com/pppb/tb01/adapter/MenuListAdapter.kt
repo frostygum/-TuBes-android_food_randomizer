@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.pppb.tb01.databinding.ComponentMenuItemBinding
-import com.pppb.tb01.fragment.FragmentListener
 import com.pppb.tb01.model.Menu
 import com.pppb.tb01.viewmodel.PageViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewModel: PageViewModel) : ArrayAdapter<Menu>(context, 0, data) {
     private val menuList: List<Menu> = data

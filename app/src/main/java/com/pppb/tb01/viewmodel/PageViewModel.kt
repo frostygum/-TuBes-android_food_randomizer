@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 class PageViewModel() : ViewModel() {
     private val page: MutableLiveData<Int> = MutableLiveData()
     private val leftDrawerState: MutableLiveData<Boolean> = MutableLiveData()
+    private val selectedFoodId: MutableLiveData<Int> = MutableLiveData()
 
     init {
         changePage(1)
@@ -16,11 +17,17 @@ class PageViewModel() : ViewModel() {
 
     fun getLeftDrawerState() = this.leftDrawerState as LiveData<Boolean>
 
+    fun getSelectedFoodId() = this.selectedFoodId as LiveData<Int>
+
     fun changePage(pageNumber: Int) {
         this.page.value = pageNumber
     }
 
     fun closeLeftDrawer() {
         this.leftDrawerState.value = false
+    }
+
+    fun setSelectedFoodId(id: Int) {
+        this.selectedFoodId.value = id
     }
 }

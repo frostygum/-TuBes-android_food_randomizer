@@ -42,9 +42,9 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         val adapter: FoodListAdapter
 
         adapter = if(foods != null) {
-            FoodListAdapter(activity!!, foods)
+            FoodListAdapter(activity!!, foods, pageViewModel)
         } else {
-            FoodListAdapter(activity!!, listOf())
+            FoodListAdapter(activity!!, listOf(), pageViewModel)
         }
 
         foodListViewModel.getFoods().observe(viewLifecycleOwner, {
