@@ -3,6 +3,7 @@ package com.pppb.tb01
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
@@ -34,24 +35,29 @@ class MainActivity : AppCompatActivity(), FragmentListener {
 
         //Bikin custom ActionBar
         this.setSupportActionBar(this.binding.toolbar)
-        //Tombol Garis Tiga
-        val toggle = ActionBarDrawerToggle(
-            this,
-            drawer_layout,
-            toolbar,
-            R.string.open_drawer,
-            R.string.open_drawer
-        )
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+
+        pageViewModel.getLeftDrawerState().observe(this, {
+            if(!it) {
+                this.binding.drawerLayout.closeDrawers()
+            }
+        })
 
         pageViewModel.getPage().observe(this, {
             changePage(it)
         })
-    }
 
-    override fun closeDrawer() {
-        this.drawer_layout.closeDrawers()
+        //Creating burger navigation button
+        val toggle = ActionBarDrawerToggle(
+            this,
+            this.binding.drawerLayout,
+            this.binding.toolbar,
+            R.string.open_drawer,
+            R.string.open_drawer
+        )
+        drawer_layout.addDrawerListener(toggle)
+
+        //SyncState must be last open or close Drawer
+        toggle.syncState()
     }
 
     private fun changePage(pageNumber: Int) {

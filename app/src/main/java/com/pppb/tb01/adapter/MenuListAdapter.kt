@@ -9,8 +9,10 @@ import android.widget.ArrayAdapter
 import com.pppb.tb01.databinding.ComponentMenuItemBinding
 import com.pppb.tb01.fragment.FragmentListener
 import com.pppb.tb01.model.Menu
+import com.pppb.tb01.viewmodel.PageViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MenuListAdapter(context: Context, data: List<Menu>, private val listener: FragmentListener) : ArrayAdapter<Menu>(context, 0, data) {
+class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewModel: PageViewModel) : ArrayAdapter<Menu>(context, 0, data) {
     private val menuList: List<Menu> = data
     private val view: Context = context
 
@@ -23,7 +25,7 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val listener: 
 
         if (convertView == null) {
             itemView = ComponentMenuItemBinding.inflate(LayoutInflater.from(this.view)).root
-            viewHolder = ViewHolder(itemView, listener)
+            viewHolder = ViewHolder(itemView, pageViewModel)
             itemView.tag = viewHolder
         } else {
             itemView = convertView
@@ -35,7 +37,7 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val listener: 
         return itemView
     }
 
-    private class ViewHolder(view: View,  private val listener: FragmentListener) {
+    private class ViewHolder(view: View,  private val pageViewModel: PageViewModel) {
         private val binding: ComponentMenuItemBinding = ComponentMenuItemBinding.bind(view)
 
         fun updateView(menu: Menu) {
@@ -43,13 +45,13 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val listener: 
 
             this.binding.menuList.setOnClickListener{
                 when(menu.getId()) {
-                    1 -> Log.d("DEBUG", "BTN CLICK")
-                    2 -> Log.d("DEBUG", "BTN CLICK")
+                    1 -> pageViewModel.changePage(1)
+                    2 -> pageViewModel.changePage(2)
                     else -> {
                         Log.d("DEBUG", "BTN CLICK")
                     }
                 }
-                this.listener.closeDrawer()
+                pageViewModel.closeLeftDrawer()
             }
         }
     }
