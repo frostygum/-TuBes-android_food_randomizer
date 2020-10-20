@@ -4,33 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/marginLayout">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/title"
-        android:text="@string/search"/>
+    android:layout_margin="@dimen/marginLayout"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/et_search"/>
+            android:id="@+id/et_search"
+            />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_search"
-            android:text="Cari"/>
+            android:text="Cari"
+            />
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/lv_search_food"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
 </LinearLayout>
