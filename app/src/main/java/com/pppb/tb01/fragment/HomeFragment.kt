@@ -34,7 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         this.binding.btnHomeCari.setOnClickListener {
             pageViewModel.changePage(2)
         }
-
+        pageViewModel.changeTitle("Home")
         return this.binding.root
     }
 }
