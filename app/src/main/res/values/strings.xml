@@ -5,26 +5,23 @@
     <string name="btn_cari">Cari</string>
     <string name="header_menu">Menu</string>
 
-    <string name="deskripsi">Deskripsi</string>
-    <string name="Tag">Tag</string>
-    <string name="Bahan">Bahan</string>
-    <string name="Langkah">Langkah Memasak : </string>
-    <string name="Resto">Tersedia di resto :</string>
-
     <string name="open_drawer">open</string>
     <string name="close_drawer">close</string>
 
     <string name="tv_menu_item_text">Menu title</string>
     <string name="tv_food_item_text">Food name</string>
 
-    <!--  Add Food Layout  -->
-    <string name="et_addFood_hint_name">Nama makanan</string>
-    <string name="et_addFood_hint_desc">Deskripsi makanan</string>
-    <string name="et_addFood_hint_tags">Tags, pisahkan dengan enter</string>
-    <string name="et_addFood_hint_ingredients">Bahan, pisahkan dengan enter</string>
-    <string name="et_addFood_hint_steps">Langkah, pisahkan dengan enter</string>
-    <string name="et_addFood_hint_restaurants">Restaurant, pisahkan dengan enter</string>
+    <string name="tv_food_name">Nama makanan :</string>
+    <string name="tv_food_desc">Deskripsi makanan :</string>
+    <string name="tv_food_tags">Tags :</string>
+    <string name="tv_food_ingredients">Bahan digunakan :</string>
+    <string name="tv_food_steps">Langkah membuat :</string>
+    <string name="tv_food_restaurants">Tersedia di restoran :</string>
+
+    <string name="et_addFood_hint_single"> </string>
+    <string name="et_addFood_hint_enter">pisahkan dengan enter untuk lebih dari 1</string>
     <string name="btn_addFood_update">Add</string>
+    <string name="btn_editFood_update">Save</string>
 
     <string name="themeSet">Theme</string>
     <string name="light">Light</string>

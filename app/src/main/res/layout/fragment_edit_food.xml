@@ -107,7 +107,7 @@
             android:id="@+id/btn_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_addFood_update"
+            android:text="@string/btn_editFood_update"
             android:layout_marginTop="20dp"
             />
     </LinearLayout>
