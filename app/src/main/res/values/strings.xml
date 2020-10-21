@@ -22,6 +22,7 @@
     <string name="et_addFood_hint_enter">pisahkan dengan enter untuk lebih dari 1</string>
     <string name="btn_addFood_update">Add</string>
     <string name="btn_editFood_update">Save</string>
+    <string name="et_search_list_hint">cari makanan apa ?</string>
 
     <string name="themeSet">Theme</string>
     <string name="light">Light</string>

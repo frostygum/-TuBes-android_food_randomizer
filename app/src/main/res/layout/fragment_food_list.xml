@@ -16,9 +16,36 @@
         android:layout_margin="20dp"
         android:src="@drawable/icon_plus"
         />
-    <ListView
-        android:id="@+id/lv_list_food"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            >
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/et_search"
+                android:inputType="text"
+                android:hint="@string/et_search_list_hint"
+                android:importantForAutofill="no" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_search"
+                android:text="@string/btn_cari"
+                />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/lv_list_food"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
 </RelativeLayout>

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
-import com.pppb.tb01.databinding.FragmentAddFoodBinding
 import com.pppb.tb01.databinding.FragmentEditFoodBinding
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel

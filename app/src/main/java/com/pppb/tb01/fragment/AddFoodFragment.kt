@@ -1,8 +1,6 @@
 package com.pppb.tb01.fragment
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,6 @@ import com.pppb.tb01.databinding.FragmentAddFoodBinding
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
-import java.lang.ClassCastException
 
 class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     private lateinit var binding: FragmentAddFoodBinding

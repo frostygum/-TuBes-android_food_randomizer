@@ -1,6 +1,5 @@
 package com.pppb.tb01.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import com.pppb.tb01.adapter.MenuListAdapter
 import com.pppb.tb01.databinding.FragmentDrawerLeftBinding
 import com.pppb.tb01.model.Menu
 import com.pppb.tb01.viewmodel.PageViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.ClassCastException
 
 class DrawerLeftFragment(): Fragment() {
     private lateinit var binding: FragmentDrawerLeftBinding
