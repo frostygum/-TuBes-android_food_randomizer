@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_single"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             />
         <TextView
             android:layout_width="match_parent"

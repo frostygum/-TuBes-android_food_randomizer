@@ -20,7 +20,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_name"
+            android:id="@+id/et_editFood_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -36,12 +36,12 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_desc"
+            android:id="@+id/et_editFood_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_single"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             />
         <TextView
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_tags"
+            android:id="@+id/et_editFood_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -66,7 +66,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_ingredients"
+            android:id="@+id/et_editFood_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -81,7 +81,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_steps"
+            android:id="@+id/et_editFood_steps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -96,7 +96,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_restaurants"
+            android:id="@+id/et_editFood_restaurants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"

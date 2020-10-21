@@ -20,5 +20,10 @@ class FoodListViewModel(): ViewModel() {
         this.update()
     }
 
+    fun setFoodById(food: Food, id: Int) {
+        this.foodList[id] = food
+        this.update()
+    }
+
     private fun update() { this.foods.value = foodList }
 }

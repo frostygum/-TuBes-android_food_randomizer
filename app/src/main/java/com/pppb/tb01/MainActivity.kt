@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
-    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment)
+    private val editFoodFragment: EditFoodFragment = EditFoodFragment.newInstance()
+    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment, editFoodFragment)
     //viewModel
     private lateinit var pageViewModel: PageViewModel
 
