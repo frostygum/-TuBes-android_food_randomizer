@@ -1,6 +1,9 @@
 package com.pppb.tb01.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.adapter.FoodListAdapter
 import com.pppb.tb01.databinding.FragmentFoodListBinding
+import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
 
@@ -16,8 +20,11 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
     private lateinit var binding: FragmentFoodListBinding
     private lateinit var foodListViewModel: FoodListViewModel
     private lateinit var pageViewModel: PageViewModel
+    private lateinit var foods: List<Food>
+    private lateinit var adapter: FoodListAdapter
 
     companion object {
+        //Singleton to instantiate current fragment
         fun newInstance(): FoodListFragment {
             return FoodListFragment()
         }
@@ -28,40 +35,70 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //Instantiate viewBinding
         this.binding = FragmentFoodListBinding.inflate(inflater, container, false)
-
-        foodListViewModel = activity?.run {
+        //Instantiate viewModel
+        this.foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
-
-        pageViewModel = activity?.run {
+        this.pageViewModel = activity?.run {
             ViewModelProvider(this).get(PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+        //Instantiate array of Food
+        this.foods = this.foodListViewModel.getFoods().value!!
+        //Instantiate ListView Adapter
+        this.adapter = FoodListAdapter(activity!!, this.foods, this.pageViewModel)
+        //Change toolbar title for current fragment
+        pageViewModel.changeTitle("Menu")
 
-        val foods = foodListViewModel.getFoods().value
-        val adapter: FoodListAdapter
+        //When viewModel array of Food changes will automatically update list trough adapter
+        this.foodListViewModel.getFoods().observe(viewLifecycleOwner, { foods ->
+            this.adapter.update(foods)
+        })
 
-        adapter = if(foods != null) {
-            FoodListAdapter(activity!!, foods, pageViewModel)
-        } else {
-            FoodListAdapter(activity!!, listOf(), pageViewModel)
+        //Button "Cari" for search/ filtering current food list listener
+        this.binding.btnSearch.setOnClickListener{
+            this.filterByName(this.binding.etSearch.text.toString().trim())
         }
 
-        foodListViewModel.getFoods().observe(viewLifecycleOwner, {
-            if(it != null) {
-                adapter.update(it)
-            }
-            else {
-                adapter.update(listOf())
+        //Listener when user typing on search EditText
+        this.binding.etSearch.addTextChangedListener(object : TextWatcher {
+            //Must have every override function
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //When no text on EditText, return back listView
+                if(count == 0) {
+                    adapter.update(foods)
+                }
             }
         })
 
-        this.binding.lvListFood.adapter = adapter
-
+        //Button "+" addFood listener
         this.binding.fbAddFood.setOnClickListener{
-            pageViewModel.changePage(3)
+            this.pageViewModel.changePage(3)
         }
-        pageViewModel.changeTitle("Menu")
+
+        //Set for current adapter
+        this.binding.lvListFood.adapter = this.adapter
+        //Return fragment view
         return this.binding.root
+    }
+
+    //Function to filter list by search keyword
+    private fun filterByName(keyword: String) {
+        //Check empty keyword
+        if(keyword != "" || keyword.isNotEmpty()) {
+            //Filtering array of food with custom function
+            val newFoodList = this.foods.filter { food ->
+                food.getName().contains(keyword, true)
+            }
+            //Then update it to adapter, but no need update existing array of food
+            this.adapter.update(newFoodList)
+        }
+        //If no keyword, return back the listView items
+        else {
+            this.adapter.update(this.foods)
+        }
     }
 }
