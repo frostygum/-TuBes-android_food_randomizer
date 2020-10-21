@@ -19,6 +19,8 @@ class PageViewModel() : ViewModel() {
 
     fun getSelectedFoodId() = this.selectedFoodId as LiveData<Int>
 
+    fun getTittle() = this.page as MutableLiveData<String>
+
     fun changePage(pageNumber: Int) {
         this.page.value = pageNumber
     }

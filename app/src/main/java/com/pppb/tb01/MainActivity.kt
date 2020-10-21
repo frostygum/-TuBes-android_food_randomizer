@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
@@ -20,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
     private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment)
+    private val title = MutableLiveData<String>()
+
+
     //viewModel
     private lateinit var pageViewModel: PageViewModel
 
@@ -42,6 +46,12 @@ class MainActivity : AppCompatActivity() {
         pageViewModel.getPage().observe(this, {
             changePage(it)
         })
+
+        pageViewModel.getTittle().observe(this{
+            changeTitle(it)
+        })
+
+
 
         //Creating burger navigation button
         val toggle = ActionBarDrawerToggle(
@@ -82,5 +92,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         ft.commit()
+    }
+
+    private fun changeTitle(){
+
     }
 }
