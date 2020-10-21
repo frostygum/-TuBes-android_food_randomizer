@@ -47,9 +47,25 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage(2)
+                pageViewModel.changePage(2, true)
             }
         })
+
+        foodListViewModel.getFoods().observe(viewLifecycleOwner, {
+            val foods = it
+            val food = foods?.get(pageViewModel.getSelectedFoodId().value!!)
+
+            if(food != null) {
+                updateUI(food)
+            }
+            else {
+                pageViewModel.changePage(2, true)
+            }
+        })
+
+        this.binding.btnEditFood.setOnClickListener{
+            pageViewModel.changePage(5)
+        }
 
         return this.binding.root
     }
@@ -79,7 +95,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         var str = ""
         for((i, item) in arr.withIndex()) {
             str += if(i < arr.size - 1) {
-                "$item \n"
+                "$item\n"
             } else {
                 item
             }
