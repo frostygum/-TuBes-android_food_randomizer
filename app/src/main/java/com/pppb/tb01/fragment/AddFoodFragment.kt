@@ -50,7 +50,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
 
             foodListViewModel.addFood(newFood)
             resetForm(this.binding)
-            pageViewModel.changePage(2)
+            pageViewModel.changePage(2, true)
         }
 
         return this.binding.root

@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         pageViewModel.getPage().observe(this, {
-            changePage(it)
+            changePage(it.first, it.second)
         })
 
         //Creating burger navigation button
@@ -57,8 +57,9 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
-    private fun changePage(pageNumber: Int) {
-        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+    private fun changePage(pageNumber: Int, popBackStack: Boolean) {
+        val manager = supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
         val container: Int = this.binding.fragmentContainer.id
 
         if(this.fragments[pageNumber - 1].isAdded) {
@@ -71,6 +72,10 @@ class MainActivity : AppCompatActivity() {
             else {
                 ft.add(container, this.fragments[pageNumber - 1])
             }
+        }
+
+        if(popBackStack) {
+            manager.popBackStackImmediate()
         }
 
         for((i, fragment) in fragments.withIndex()) {
