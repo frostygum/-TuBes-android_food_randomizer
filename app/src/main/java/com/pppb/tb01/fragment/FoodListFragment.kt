@@ -61,7 +61,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.binding.fbAddFood.setOnClickListener{
             pageViewModel.changePage(3)
         }
-
+        pageViewModel.changeTitle("Menu")
         return this.binding.root
     }
 }

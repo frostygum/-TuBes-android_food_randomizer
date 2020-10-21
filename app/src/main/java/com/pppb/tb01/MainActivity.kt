@@ -3,13 +3,16 @@ package com.pppb.tb01
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
 import com.pppb.tb01.viewmodel.PageViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
     private val editFoodFragment: EditFoodFragment = EditFoodFragment.newInstance()
     private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment, editFoodFragment)
+
     //viewModel
     private lateinit var pageViewModel: PageViewModel
 
@@ -42,6 +46,10 @@ class MainActivity : AppCompatActivity() {
 
         pageViewModel.getPage().observe(this, {
             changePage(it.first, it.second)
+        })
+
+        pageViewModel.getTitle().observe(this, {
+            changeTitle(it)
         })
 
         //Creating burger navigation button
@@ -89,4 +97,10 @@ class MainActivity : AppCompatActivity() {
 
         ft.commit()
     }
+
+    private fun changeTitle(title: String){
+        this.binding.toolbar.setTitle(title)
+    }
 }
+
+
