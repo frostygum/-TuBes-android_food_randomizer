@@ -42,26 +42,26 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         } ?: throw Exception("Invalid Activity")
 
         this.binding.btnAdd.setOnClickListener{
-            val newFood = Food(this.binding.etAddFoodName.text.toString(), this.binding.etAddFoodDesc.text.toString())
-            newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().split("\n"))
-            newFood.setTags(this.binding.etAddFoodTags.text.toString().split("\n"))
-            newFood.setSteps(this.binding.etAddFoodSteps.text.toString().split("\n"))
-            newFood.setRestaurants(this.binding.etAddFoodRestaurants.text.toString().split("\n"))
+            val newFood = Food(this.binding.etAddFoodName.text.toString().trim(), this.binding.etAddFoodDesc.text.toString().trim())
+            newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().trim().split("\n"))
+            newFood.setTags(this.binding.etAddFoodTags.text.toString().trim().split("\n"))
+            newFood.setSteps(this.binding.etAddFoodSteps.text.toString().trim().split("\n"))
+            newFood.setRestaurants(this.binding.etAddFoodRestaurants.text.toString().trim().split("\n"))
 
             foodListViewModel.addFood(newFood)
-            resetForm(this.binding)
-            pageViewModel.changePage(2)
+            resetForm()
+            pageViewModel.changePage(2, true)
         }
 
         return this.binding.root
     }
 
-    private fun resetForm(binding: FragmentAddFoodBinding) {
-        binding.etAddFoodDesc.setText("")
-        binding.etAddFoodName.setText("")
-        binding.etAddFoodIngredients.setText("")
-        binding.etAddFoodRestaurants.setText("")
-        binding.etAddFoodSteps.setText("")
-        binding.etAddFoodTags.setText("")
+    private fun resetForm() {
+        this.binding.etAddFoodDesc.setText("")
+        this.binding.etAddFoodName.setText("")
+        this.binding.etAddFoodIngredients.setText("")
+        this.binding.etAddFoodRestaurants.setText("")
+        this.binding.etAddFoodSteps.setText("")
+        this.binding.etAddFoodTags.setText("")
     }
 }

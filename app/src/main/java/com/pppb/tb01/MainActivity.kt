@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     private val foodListFragment: FoodListFragment = FoodListFragment.newInstance()
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
+    private val editFoodFragment: EditFoodFragment = EditFoodFragment.newInstance()
+    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment, editFoodFragment)
     private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment)
     private val title = MutableLiveData<String>()
 
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         pageViewModel.getPage().observe(this, {
-            changePage(it)
+            changePage(it.first, it.second)
         })
 
         pageViewModel.getTittle().observe(this{
@@ -67,8 +69,9 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
-    private fun changePage(pageNumber: Int) {
-        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+    private fun changePage(pageNumber: Int, popBackStack: Boolean) {
+        val manager = supportFragmentManager
+        val ft: FragmentTransaction = manager.beginTransaction()
         val container: Int = this.binding.fragmentContainer.id
 
         if(this.fragments[pageNumber - 1].isAdded) {
@@ -81,6 +84,10 @@ class MainActivity : AppCompatActivity() {
             else {
                 ft.add(container, this.fragments[pageNumber - 1])
             }
+        }
+
+        if(popBackStack) {
+            manager.popBackStackImmediate()
         }
 
         for((i, fragment) in fragments.withIndex()) {

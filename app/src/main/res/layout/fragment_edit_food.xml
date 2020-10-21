@@ -20,7 +20,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_name"
+            android:id="@+id/et_editFood_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -36,7 +36,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_desc"
+            android:id="@+id/et_editFood_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_single"
@@ -51,7 +51,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_tags"
+            android:id="@+id/et_editFood_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -66,7 +66,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_ingredients"
+            android:id="@+id/et_editFood_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -81,7 +81,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_steps"
+            android:id="@+id/et_editFood_steps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -96,7 +96,7 @@
             android:textSize="15sp"
             />
         <EditText
-            android:id="@+id/et_addFood_restaurants"
+            android:id="@+id/et_editFood_restaurants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_addFood_hint_enter"
@@ -107,7 +107,7 @@
             android:id="@+id/btn_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_addFood_update"
+            android:text="@string/btn_editFood_update"
             android:layout_marginTop="20dp"
             />
     </LinearLayout>
