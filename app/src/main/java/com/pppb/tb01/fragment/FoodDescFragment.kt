@@ -63,6 +63,8 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
             }
         })
 
+        pageViewModel.changeTitle("Menu")
+
         this.binding.btnEditFood.setOnClickListener{
             pageViewModel.changePage(5)
         }

@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
     private val editFoodFragment: EditFoodFragment = EditFoodFragment.newInstance()
     private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment, editFoodFragment)
-    private val title = MutableLiveData<String>()
-
 
     //viewModel
     private lateinit var pageViewModel: PageViewModel
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         pageViewModel.getTitle().observe(this, {
             changeTitle(it)
         })
-
 
         //Creating burger navigation button
         val toggle = ActionBarDrawerToggle(

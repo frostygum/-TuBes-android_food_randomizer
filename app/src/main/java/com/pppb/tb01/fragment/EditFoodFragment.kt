@@ -50,7 +50,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
                 pageViewModel.changePage(2, true)
             }
         })
-
+        pageViewModel.changeTitle("Edit")
         this.binding.btnAdd.setOnClickListener{
             val id = pageViewModel.getSelectedFoodId().value
             val newFood = Food(this.binding.etEditFoodName.text.toString().trim(), this.binding.etEditFoodDesc.text.toString().trim())

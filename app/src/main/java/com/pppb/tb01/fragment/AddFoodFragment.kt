@@ -41,6 +41,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
             ViewModelProvider(this).get(PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        pageViewModel.changeTitle("Add Food")
         this.binding.btnAdd.setOnClickListener{
             val newFood = Food(this.binding.etAddFoodName.text.toString().trim(), this.binding.etAddFoodDesc.text.toString().trim())
             newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().trim().split("\n"))
