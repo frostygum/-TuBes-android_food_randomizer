@@ -46,7 +46,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage(2, true)
+                pageViewModel.changePage("LIST_FOOD", true)
             }
         })
 
@@ -58,14 +58,14 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage(2, true)
+                pageViewModel.changePage("LIST_FOOD", true)
             }
         })
 
-        pageViewModel.changeTitle("Menu")
+        pageViewModel.changeTitle("Makanan")
 
         this.binding.btnEditFood.setOnClickListener{
-            pageViewModel.changePage(5)
+            pageViewModel.changePage("EDIT_FOOD")
         }
 
         return this.binding.root
@@ -104,4 +104,9 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         return str
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Makanan")
+        }
+    }
 }

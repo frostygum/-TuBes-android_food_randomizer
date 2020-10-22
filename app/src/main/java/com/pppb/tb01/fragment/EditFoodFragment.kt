@@ -46,10 +46,10 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage(2, true)
+                pageViewModel.changePage("LIST_FOOD", true)
             }
         })
-        pageViewModel.changeTitle("Edit")
+        pageViewModel.changeTitle("Edit Makanan")
         this.binding.btnAdd.setOnClickListener{
             val id = pageViewModel.getSelectedFoodId().value
             val newFood = Food(this.binding.etEditFoodName.text.toString().trim(), this.binding.etEditFoodDesc.text.toString().trim())
@@ -60,7 +60,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
 
             foodListViewModel.setFoodById(newFood, id!!)
             resetForm()
-            pageViewModel.changePage(4, true)
+            pageViewModel.changePage("DESC_FOOD", true)
         }
 
         return this.binding.root
@@ -94,5 +94,11 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
         this.binding.etEditFoodRestaurants.setText("")
         this.binding.etEditFoodSteps.setText("")
         this.binding.etEditFoodTags.setText("")
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Edit Makanan")
+        }
     }
 }

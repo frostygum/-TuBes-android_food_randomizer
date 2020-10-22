@@ -1,21 +1,21 @@
 package com.pppb.tb01
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
 import com.pppb.tb01.viewmodel.PageViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
+    //Binding
     private lateinit var binding : ActivityMainBinding
     //fragments
     private val homeFragment: HomeFragment = HomeFragment.newInstance()
@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
     private val editFoodFragment: EditFoodFragment = EditFoodFragment.newInstance()
-    private val fragments: List<Fragment> = listOf(homeFragment, foodListFragment, addFoodFragment, foodDescFragment, editFoodFragment)
-
     //viewModel
     private lateinit var pageViewModel: PageViewModel
 
@@ -39,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         this.setSupportActionBar(this.binding.toolbar)
 
         pageViewModel.getLeftDrawerState().observe(this, {
-            if(!it) {
+            if (!it) {
                 this.binding.drawerLayout.closeDrawers()
             }
         })
@@ -66,40 +64,46 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
     }
 
-    private fun changePage(pageNumber: Int, popBackStack: Boolean) {
-        val manager = supportFragmentManager
+    private fun changeFragment(frag: Fragment, tag: String, saveInBackStack: Boolean = false) {
+        val manager: FragmentManager = supportFragmentManager
+        //Pop current fragment if fragment inside backStack
+        val fragmentPopped: Boolean = manager.popBackStackImmediate(tag, 0)
         val ft: FragmentTransaction = manager.beginTransaction()
-        val container: Int = this.binding.fragmentContainer.id
 
-        if(this.fragments[pageNumber - 1].isAdded) {
-            ft.show(this.fragments[pageNumber - 1])
-        }
-        else {
-            if(pageNumber > 1) {
-                ft.add(container, this.fragments[pageNumber - 1]).addToBackStack(null)
+        if (!fragmentPopped && manager.findFragmentByTag(tag) == null) {
+            ft.replace(this.binding.fragmentContainer.id, frag, tag)
+            if (saveInBackStack) {
+                ft.addToBackStack(tag)
             }
-            else {
-                ft.add(container, this.fragments[pageNumber - 1])
-            }
-        }
-
-        if(popBackStack) {
-            manager.popBackStackImmediate()
-        }
-
-        for((i, fragment) in fragments.withIndex()) {
-            if(i + 1 != pageNumber) {
-                if(fragment.isAdded) {
-                    ft.hide(fragment)
-                }
-            }
+        } else {
+            ft.replace(this.binding.fragmentContainer.id, frag, tag)
         }
 
         ft.commit()
     }
 
+    private fun changePage(pageName: String, popBackStack: Boolean) {
+        when(pageName) {
+            "HOME" -> {
+                this.changeFragment(this.homeFragment, pageName)
+            }
+            "LIST_FOOD" -> {
+                this.changeFragment(this.foodListFragment, pageName, true)
+            }
+            "ADD_FOOD" -> {
+                this.changeFragment(this.addFoodFragment, pageName, true)
+            }
+            "DESC_FOOD" -> {
+                this.changeFragment(this.foodDescFragment, pageName, true)
+            }
+            "EDIT_FOOD" -> {
+                this.changeFragment(this.editFoodFragment, pageName, true)
+            }
+        }
+    }
+
     private fun changeTitle(title: String){
-        this.binding.toolbar.setTitle(title)
+        this.binding.toolbar.title = title
     }
 }
 

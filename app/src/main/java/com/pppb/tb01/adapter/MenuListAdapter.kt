@@ -43,8 +43,8 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewMo
 
             this.binding.menuList.setOnClickListener{
                 when(menu.getId()) {
-                    1 -> pageViewModel.changePage(1)
-                    2 -> pageViewModel.changePage(2)
+                    1 -> pageViewModel.changePage("HOME")
+                    2 -> pageViewModel.changePage("LIST_FOOD")
                     else -> {
                         Log.d("DEBUG", "BTN CLICK")
                     }

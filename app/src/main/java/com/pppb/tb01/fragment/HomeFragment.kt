@@ -32,9 +32,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } ?: throw Exception("Invalid Activity")
 
         this.binding.btnHomeCari.setOnClickListener {
-            pageViewModel.changePage(2)
+            pageViewModel.changePage("LIST_FOOD")
         }
         pageViewModel.changeTitle("Home")
         return this.binding.root
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Home")
+        }
     }
 }

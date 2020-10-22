@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
@@ -76,7 +77,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
 
         //Button "+" addFood listener
         this.binding.fbAddFood.setOnClickListener{
-            this.pageViewModel.changePage(3)
+            this.pageViewModel.changePage("ADD_FOOD")
         }
 
         //Set for current adapter
@@ -99,6 +100,12 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         //If no keyword, return back the listView items
         else {
             this.adapter.update(this.foods)
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Menu")
         }
     }
 }

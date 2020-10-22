@@ -64,7 +64,7 @@ class FoodListAdapter(context: Context, data: List<Food>, private val pageViewMo
             this.binding.foodItem.setOnClickListener{
                 //Set current selected to viewModel then change fragment
                 pageViewModel.setSelectedFoodId(position)
-                pageViewModel.changePage(4)
+                pageViewModel.changePage("DESC_FOOD")
             }
         }
     }

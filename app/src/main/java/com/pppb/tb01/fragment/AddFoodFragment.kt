@@ -30,15 +30,20 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
     ): View? {
         this.binding = FragmentAddFoodBinding.inflate(inflater, container, false)
 
-        foodListViewModel = activity?.run {
+        this.foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        pageViewModel = activity?.run {
+        this.pageViewModel = activity?.run {
             ViewModelProvider(this).get(PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        pageViewModel.changeTitle("Add Food")
+        return this.binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        pageViewModel.changeTitle("Add Makanan")
+
         this.binding.btnAdd.setOnClickListener{
             val newFood = Food(this.binding.etAddFoodName.text.toString().trim(), this.binding.etAddFoodDesc.text.toString().trim())
             newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().trim().split("\n"))
@@ -46,12 +51,10 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
             newFood.setSteps(this.binding.etAddFoodSteps.text.toString().trim().split("\n"))
             newFood.setRestaurants(this.binding.etAddFoodRestaurants.text.toString().trim().split("\n"))
 
-            foodListViewModel.addFood(newFood)
-            resetForm()
-            pageViewModel.changePage(2, true)
+            this.foodListViewModel.addFood(newFood)
+            this.resetForm()
+            this.pageViewModel.changePage("LIST_FOOD", true)
         }
-
-        return this.binding.root
     }
 
     private fun resetForm() {
@@ -61,5 +64,11 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         this.binding.etAddFoodRestaurants.setText("")
         this.binding.etAddFoodSteps.setText("")
         this.binding.etAddFoodTags.setText("")
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Add Makanan")
+        }
     }
 }
