@@ -46,7 +46,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage("LIST_FOOD", true)
+                pageViewModel.changePage("LIST_FOOD")
             }
         })
         pageViewModel.changeTitle("Edit Makanan")
@@ -60,7 +60,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
 
             foodListViewModel.setFoodById(newFood, id!!)
             resetForm()
-            pageViewModel.changePage("DESC_FOOD", true)
+            pageViewModel.changePage("DESC_FOOD")
         }
 
         return this.binding.root

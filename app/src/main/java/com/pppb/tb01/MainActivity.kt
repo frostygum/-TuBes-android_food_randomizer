@@ -1,7 +1,6 @@
 package com.pppb.tb01
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,7 +11,6 @@ import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
 import com.pppb.tb01.viewmodel.PageViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
     //Binding
@@ -43,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         pageViewModel.getPage().observe(this, {
-            changePage(it.first, it.second)
+            changePage(it)
         })
 
         pageViewModel.getTitle().observe(this, {
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         ft.commit()
     }
 
-    private fun changePage(pageName: String, popBackStack: Boolean) {
+    private fun changePage(pageName: String) {
         when(pageName) {
             "HOME" -> {
                 this.changeFragment(this.homeFragment, pageName)

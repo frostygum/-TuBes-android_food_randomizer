@@ -53,7 +53,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
 
             this.foodListViewModel.addFood(newFood)
             this.resetForm()
-            this.pageViewModel.changePage("LIST_FOOD", true)
+            this.pageViewModel.changePage("LIST_FOOD")
         }
     }
 

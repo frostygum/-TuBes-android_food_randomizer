@@ -46,7 +46,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage("LIST_FOOD", true)
+                pageViewModel.changePage("LIST_FOOD")
             }
         })
 
@@ -58,7 +58,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
                 updateUI(food)
             }
             else {
-                pageViewModel.changePage("LIST_FOOD", true)
+                pageViewModel.changePage("LIST_FOOD")
             }
         })
 
