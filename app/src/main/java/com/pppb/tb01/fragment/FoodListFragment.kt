@@ -49,6 +49,12 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.foods = this.foodListViewModel.getFoods().value!!
         //Instantiate ListView Adapter
         this.adapter = FoodListAdapter(activity!!, this.foods, this.pageViewModel)
+
+        //Return fragment view
+        return this.binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //Change toolbar title for current fragment
         pageViewModel.changeTitle("Menu")
 
@@ -82,8 +88,6 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
 
         //Set for current adapter
         this.binding.lvListFood.adapter = this.adapter
-        //Return fragment view
-        return this.binding.root
     }
 
     //Function to filter list by search keyword

@@ -31,11 +31,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             ViewModelProvider(this).get(PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        pageViewModel.changeTitle("Home")
+        return this.binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.binding.btnHomeCari.setOnClickListener {
             pageViewModel.changePage("LIST_FOOD")
         }
-        pageViewModel.changeTitle("Home")
-        return this.binding.root
     }
 
     override fun onHiddenChanged(hidden: Boolean) {

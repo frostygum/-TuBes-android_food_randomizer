@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Filter
-import android.widget.Filterable
 import com.pppb.tb01.databinding.ComponentFoodItemBinding
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.PageViewModel
-import java.util.*
-import kotlin.collections.ArrayList
 
 class FoodListAdapter(context: Context, data: List<Food>, private val pageViewModel: PageViewModel) : ArrayAdapter<Food>(
     context,

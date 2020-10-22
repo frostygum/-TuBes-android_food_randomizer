@@ -38,6 +38,12 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
             ViewModelProvider(this).get(PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        return this.binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        pageViewModel.changeTitle("Makanan")
+
         pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
             val foods = foodListViewModel.getFoods().value
             val food = foods?.get(it)
@@ -62,13 +68,9 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
             }
         })
 
-        pageViewModel.changeTitle("Makanan")
-
         this.binding.btnEditFood.setOnClickListener{
             pageViewModel.changePage("EDIT_FOOD")
         }
-
-        return this.binding.root
     }
 
     private fun updateUI(food: Food) {
