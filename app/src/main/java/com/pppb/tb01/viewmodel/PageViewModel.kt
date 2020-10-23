@@ -30,7 +30,7 @@ class PageViewModel(application: Application) : AndroidViewModel(application) {
     fun getTitle() = this.title as LiveData<String>
 
     fun getPreferredTheme() = this.themeIsDark as LiveData<Boolean>
-
+  
     fun changePage(pageName: String) {
         this.page.value = pageName
     }

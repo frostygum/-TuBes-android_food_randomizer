@@ -1,6 +1,5 @@
 package com.pppb.tb01.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -76,5 +75,11 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         this.binding.etAddFoodRestaurants.setText("")
         this.binding.etAddFoodSteps.setText("")
         this.binding.etAddFoodTags.setText("")
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Add Makanan")
+        }
     }
 }

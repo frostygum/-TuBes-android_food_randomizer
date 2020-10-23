@@ -43,4 +43,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             this.pageViewModel.changePage("LIST_FOOD")
         }
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Home")
+        }
+    }
 }

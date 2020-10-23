@@ -115,4 +115,10 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
         this.binding.etEditFoodSteps.setText("")
         this.binding.etEditFoodTags.setText("")
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Edit Makanan")
+        }
+    }
 }

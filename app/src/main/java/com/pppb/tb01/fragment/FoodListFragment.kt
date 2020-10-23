@@ -113,4 +113,27 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
             this.adapter.update(this.foods)
         }
     }
+
+    //Function to filter list by search keyword
+    private fun filterByName(keyword: String) {
+        //Check empty keyword
+        if(keyword != "" || keyword.isNotEmpty()) {
+            //Filtering array of food with custom function
+            val newFoodList = this.foods.filter { food ->
+                food.getName().contains(keyword, true)
+            }
+            //Then update it to adapter, but no need update existing array of food
+            this.adapter.update(newFoodList)
+        }
+        //If no keyword, return back the listView items
+        else {
+            this.adapter.update(this.foods)
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(!hidden) {
+            pageViewModel.changeTitle("Menu")
+        }
+    }
 }
