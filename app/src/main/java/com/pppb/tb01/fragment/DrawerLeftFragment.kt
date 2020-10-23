@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.adapter.MenuListAdapter
 import com.pppb.tb01.databinding.FragmentDrawerLeftBinding
 import com.pppb.tb01.model.Menu
 import com.pppb.tb01.viewmodel.PageViewModel
+import com.pppb.tb01.viewmodel.ViewModelFactory
 
 class DrawerLeftFragment(): Fragment() {
     private lateinit var binding: FragmentDrawerLeftBinding
@@ -21,20 +21,26 @@ class DrawerLeftFragment(): Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //Instantiate ViewBinding
         this.binding = FragmentDrawerLeftBinding.inflate(inflater, container, false)
+        //Instantiate Page ViewModel
         this.pageViewModel = activity?.run {
-            ViewModelProvider(this).get(PageViewModel::class.java)
+            ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val menuList: ListView = binding.lvListMenu
+        //Create List of Menu for Drawer
         val menus = listOf<Menu>(
             Menu("Home", 1),
-            Menu("Page2", 2),
-            Menu("Exit", 3)
+            Menu("Cari", 2),
+            Menu("Menu", 3),
+            Menu("Setting", 4),
+            Menu("Exit", 5)
         )
+        //Create Adapter
         val adapter = MenuListAdapter(activity!!, menus, this.pageViewModel)
-        menuList.adapter = adapter
-
+        //Set Adapter to ListView
+        this.binding.lvListMenu.adapter = adapter
+        //Return current Fragment View
         return binding.root
     }
 }

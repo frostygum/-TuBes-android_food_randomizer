@@ -11,6 +11,7 @@ import com.pppb.tb01.databinding.FragmentFoodDescBinding
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
+import com.pppb.tb01.viewmodel.ViewModelFactory
 
 class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
     private lateinit var binding: FragmentFoodDescBinding
@@ -28,51 +29,45 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        this.binding = FragmentFoodDescBinding.inflate(inflater, container, false)
 
-        foodListViewModel = activity?.run {
+        //Instantiate View Binding
+        this.binding = FragmentFoodDescBinding.inflate(inflater, container, false)
+        //Instantiate Food ViewModel
+        this.foodListViewModel = activity?.run {
             ViewModelProvider(this).get(FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
-
-        pageViewModel = activity?.run {
-            ViewModelProvider(this).get(PageViewModel::class.java)
+        //Instantiate Page ViewModel
+        this.pageViewModel = activity?.run {
+            ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
-
+        //Return current Fragment View
         return this.binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pageViewModel.changeTitle("Makanan")
-
-        pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
-            val foods = foodListViewModel.getFoods().value
+        //Change toolbar title for current fragment
+        this.pageViewModel.changeTitle("Makanan")
+        //Observe changes SelectedFoodId
+        this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
+            //Get current Food list from ViewModel
+            val foods = this.foodListViewModel.getFoods().value
+            //Get Food at current SelectedFoodId
             val food = foods?.get(it)
-
+            //When Food found, create UI, if not change to prev page
             if(food != null) {
-                updateUI(food)
+                this.updateUI(food)
             }
             else {
                 pageViewModel.changePage("LIST_FOOD")
             }
         })
-
-        foodListViewModel.getFoods().observe(viewLifecycleOwner, {
-            val foods = it
-            val food = foods?.get(pageViewModel.getSelectedFoodId().value!!)
-
-            if(food != null) {
-                updateUI(food)
-            }
-            else {
-                pageViewModel.changePage("LIST_FOOD")
-            }
-        })
-
+        //Button "Pencil" method listener
         this.binding.btnEditFood.setOnClickListener{
-            pageViewModel.changePage("EDIT_FOOD")
+            this.pageViewModel.changePage("EDIT_FOOD")
         }
     }
 
+    //Method to change UI
     private fun updateUI(food: Food) {
         this.binding.tvMenuTitle.text = food.getName()
         this.binding.tvDesc.text = food.getDescriptions()
@@ -82,6 +77,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         this.binding.tvResto.text = processArrayToLines(food.getRestaurants())
     }
 
+    //Method to process Array od String to Coma Separated String
     private fun processArrayToLine(arr: List<String>): String {
         var str = ""
         for((i, item) in arr.withIndex()) {
@@ -94,6 +90,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         return str
     }
 
+    //Method to process Array od String to Multiline String
     private fun processArrayToLines(arr: List<String>): String {
         var str = ""
         for((i, item) in arr.withIndex()) {
@@ -104,11 +101,5 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
             }
         }
         return str
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        if(!hidden) {
-            pageViewModel.changeTitle("Makanan")
-        }
     }
 }

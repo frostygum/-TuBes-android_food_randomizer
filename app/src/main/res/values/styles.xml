@@ -1,13 +1,41 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/Light</item>
+        <item name="colorPrimaryDark">@color/Blue</item>
+        <item name="colorAccent">@color/Blue</item>
+        <item name="colorPrimaryVariant">@color/Dark</item>
+        <item name="colorButtonNormal">@color/Blue</item>
+        <item name="android:textColor">@color/Dark</item>
+        <item name="android:buttonStyle">@style/ButtonLightColor</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/Dark</item>
+        <item name="colorPrimaryDark">@color/Blue</item>
+        <item name="colorAccent">@color/Blue</item>
+        <item name="colorPrimaryVariant">@color/Light</item>
+        <item name="colorButtonNormal">@color/Light</item>
+        <item name="android:textColor">@color/Light</item>
+        <item name="android:buttonStyle">@style/ButtonDarkColor</item>
+        <item name="android:textColorPrimary">@color/Light</item>
+        <item name="android:textColorHint">#7C8C8D</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ButtonLightColor" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/Light</item>
+    </style>
+
+    <style name="ButtonDarkColor" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/Dark</item>
     </style>
 
 </resources>

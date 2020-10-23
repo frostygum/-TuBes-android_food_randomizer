@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
 import com.pppb.tb01.viewmodel.PageViewModel
+import com.pppb.tb01.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,30 +21,39 @@ class MainActivity : AppCompatActivity() {
     private val addFoodFragment: AddFoodFragment = AddFoodFragment.newInstance()
     private val foodDescFragment: FoodDescFragment = FoodDescFragment.newInstance()
     private val editFoodFragment: EditFoodFragment = EditFoodFragment.newInstance()
+    private val settingFragment: SettingFragment = SettingFragment.newInstance()
     //viewModel
     private lateinit var pageViewModel: PageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //Instantiate ViewModel with ViewModelFactory
+        this.pageViewModel = ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
+        //Change Theme When Activity Starts
+        this.changeTheme(this.pageViewModel.getPreferredTheme().value!!)
         super.onCreate(savedInstanceState)
+
+        //Instantiate ViewBinding
         this.binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
 
-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java)
-
-        //Bikin custom ActionBar
+        //Create Custom ToolBar
         this.setSupportActionBar(this.binding.toolbar)
 
-        pageViewModel.getLeftDrawerState().observe(this, {
+        //Observe LeftDrawer toggle state
+        this.pageViewModel.getLeftDrawerState().observe(this, {
+            //When FALSE Close Drawer
             if (!it) {
                 this.binding.drawerLayout.closeDrawers()
             }
         })
-
-        pageViewModel.getPage().observe(this, {
+        //Observe Page state
+        this.pageViewModel.getPage().observe(this, {
+            //Update Page
             changePage(it)
         })
-
-        pageViewModel.getTitle().observe(this, {
+        //Observe ToolbarTitle state
+        this.pageViewModel.getTitle().observe(this, {
+            //Update Title
             changeTitle(it)
         })
 
@@ -56,25 +65,36 @@ class MainActivity : AppCompatActivity() {
             R.string.open_drawer,
             R.string.open_drawer
         )
-        drawer_layout.addDrawerListener(toggle)
+        //Set Burger as Toggle Button to drawer
+        this.binding.drawerLayout.addDrawerListener(toggle)
 
         //SyncState must be last open or close Drawer
         toggle.syncState()
     }
 
+    //Method for update current activity Theme
+    private fun changeTheme(isDarkTheme: Boolean) {
+        if(isDarkTheme) {
+            setTheme(R.style.DarkTheme)
+        }
+        else {
+            setTheme(R.style.LightTheme)
+        }
+    }
+
+    //Method for change current fragment view
     private fun changeFragment(frag: Fragment, tag: String, saveInBackStack: Boolean = false) {
         val manager: FragmentManager = supportFragmentManager
         //Pop current fragment if fragment inside backStack
         val fragmentPopped: Boolean = manager.popBackStackImmediate(tag, 0)
         val ft: FragmentTransaction = manager.beginTransaction()
 
+        ft.replace(this.binding.fragmentContainer.id, frag, tag)
+
         if (!fragmentPopped && manager.findFragmentByTag(tag) == null) {
-            ft.replace(this.binding.fragmentContainer.id, frag, tag)
             if (saveInBackStack) {
                 ft.addToBackStack(tag)
             }
-        } else {
-            ft.replace(this.binding.fragmentContainer.id, frag, tag)
         }
 
         ft.commit()
@@ -86,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                 this.changeFragment(this.homeFragment, pageName)
             }
             "LIST_FOOD" -> {
-                this.changeFragment(this.foodListFragment, pageName, true)
+                this.changeFragment(this.foodListFragment, pageName)
             }
             "ADD_FOOD" -> {
                 this.changeFragment(this.addFoodFragment, pageName, true)
@@ -96,6 +116,9 @@ class MainActivity : AppCompatActivity() {
             }
             "EDIT_FOOD" -> {
                 this.changeFragment(this.editFoodFragment, pageName, true)
+            }
+            "SETTING" -> {
+                this.changeFragment(this.settingFragment, pageName)
             }
         }
     }

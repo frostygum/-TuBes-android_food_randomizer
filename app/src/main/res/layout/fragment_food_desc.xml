@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -22,7 +22,8 @@
                 android:textSize="20sp"
                 android:id="@+id/tv_menu_title"
                 android:paddingVertical="10dp"
-                android:background="@color/colorAccent"
+                android:background="?attr/colorAccent"
+                android:textColor="?attr/colorPrimary"
                 android:textStyle="bold"
                 />
             <TextView
@@ -103,7 +104,7 @@
                 android:paddingHorizontal="10dp"
                 />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_edit_food"
         android:layout_width="wrap_content"
