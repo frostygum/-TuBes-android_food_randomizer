@@ -34,7 +34,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         this.binding = FragmentFoodDescBinding.inflate(inflater, container, false)
         //Instantiate Food ViewModel
         this.foodListViewModel = activity?.run {
-            ViewModelProvider(this).get(FoodListViewModel::class.java)
+            ViewModelFactory().createViewModel(this, application, FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
         //Instantiate Page ViewModel
         this.pageViewModel = activity?.run {
@@ -49,10 +49,8 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         this.pageViewModel.changeTitle("Makanan")
         //Observe changes SelectedFoodId
         this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
-            //Get current Food list from ViewModel
-            val foods = this.foodListViewModel.getFoods().value
-            //Get Food at current SelectedFoodId
-            val food = foods?.get(it)
+            //Get Food at current SelectedFoodId from ViewModel
+            val food = this.foodListViewModel.getFoods().value?.get(it)
             //When Food found, create UI, if not change to prev page
             if(food != null) {
                 this.updateUI(food)

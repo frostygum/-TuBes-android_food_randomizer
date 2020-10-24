@@ -27,4 +27,6 @@
     <string name="themeSet">Toggle Dark Theme</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
+
+    <string name="trash_desc">Delete Button</string>
 </resources>

@@ -35,7 +35,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         this.binding = FragmentAddFoodBinding.inflate(inflater, container, false)
         //Instantiate Food ViewModel
         this.foodListViewModel = activity?.run {
-            ViewModelProvider(this).get(FoodListViewModel::class.java)
+            ViewModelFactory().createViewModel(this, application, FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
         //Instantiate Page ViewModel
         this.pageViewModel = activity?.run {
@@ -75,11 +75,5 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         this.binding.etAddFoodRestaurants.setText("")
         this.binding.etAddFoodSteps.setText("")
         this.binding.etAddFoodTags.setText("")
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        if(!hidden) {
-            pageViewModel.changeTitle("Add Makanan")
-        }
     }
 }

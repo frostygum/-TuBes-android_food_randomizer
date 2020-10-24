@@ -10,7 +10,6 @@ import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
 import com.pppb.tb01.viewmodel.PageViewModel
 import com.pppb.tb01.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     //Binding
@@ -27,7 +26,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //Instantiate ViewModel with ViewModelFactory
-        this.pageViewModel = ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
+        this.pageViewModel = ViewModelFactory().createViewModel(
+            this,
+            application,
+            PageViewModel::class.java
+        )
         //Change Theme When Activity Starts
         this.changeTheme(this.pageViewModel.getPreferredTheme().value!!)
         super.onCreate(savedInstanceState)
@@ -103,9 +106,11 @@ class MainActivity : AppCompatActivity() {
     private fun changePage(pageName: String) {
         when(pageName) {
             "HOME" -> {
+                this.clearBackStack()
                 this.changeFragment(this.homeFragment, pageName)
             }
             "LIST_FOOD" -> {
+                this.clearBackStack()
                 this.changeFragment(this.foodListFragment, pageName)
             }
             "ADD_FOOD" -> {
@@ -125,6 +130,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeTitle(title: String){
         this.binding.toolbar.title = title
+    }
+
+    private fun clearBackStack() {
+        val fm: FragmentManager = supportFragmentManager
+        for (i in 0 until fm.backStackEntryCount) {
+            fm.popBackStack()
+        }
     }
 }
 

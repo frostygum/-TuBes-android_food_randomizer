@@ -6,15 +6,24 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:padding="20dp"
-    android:gravity="center"
+    android:padding="10dp"
+    android:gravity="center_vertical"
     >
     <TextView
         android:id="@+id/tv_food_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="@string/tv_food_item_text"
         android:textSize="17sp"
-        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        />
+    <ImageButton
+        android:id="@+id/ib_trash_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_delete"
+        android:paddingVertical="15dp"
+        android:contentDescription="@string/trash_desc"
         />
 </LinearLayout>

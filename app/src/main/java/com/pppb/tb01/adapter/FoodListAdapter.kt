@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
 import com.pppb.tb01.databinding.ComponentFoodItemBinding
 import com.pppb.tb01.model.Food
+import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FoodListAdapter(context: Context, data: List<Food>, private val pageViewModel: PageViewModel) : ArrayAdapter<Food>(
+class FoodListAdapter(context: Context, data: List<Food>, private val pageViewModel: PageViewModel, private val foodListViewModel: FoodListViewModel) : ArrayAdapter<Food>(
     context,
     0,
     data
@@ -35,7 +37,7 @@ class FoodListAdapter(context: Context, data: List<Food>, private val pageViewMo
 
         if (convertView == null) {
             itemView = ComponentFoodItemBinding.inflate(LayoutInflater.from(this.view)).root
-            viewHolder = ViewHolder(itemView, pageViewModel)
+            viewHolder = ViewHolder(itemView, pageViewModel, foodListViewModel)
             itemView.tag = viewHolder
         } else {
             itemView = convertView
@@ -53,7 +55,7 @@ class FoodListAdapter(context: Context, data: List<Food>, private val pageViewMo
         this.notifyDataSetChanged()
     }
 
-    private class ViewHolder(view: View, private val pageViewModel: PageViewModel) {
+    private class ViewHolder(private val view: View, private val pageViewModel: PageViewModel, private val foodListViewModel: FoodListViewModel) {
         //Instantiate view binding for list item
         private val binding: ComponentFoodItemBinding = ComponentFoodItemBinding.bind(view)
 
@@ -63,8 +65,14 @@ class FoodListAdapter(context: Context, data: List<Food>, private val pageViewMo
             //Set onClick listener when item in the list was clicked
             this.binding.foodItem.setOnClickListener{
                 //Set current selected to viewModel then change fragment
-                pageViewModel.setSelectedFoodId(position)
-                pageViewModel.changePage("DESC_FOOD")
+                this.pageViewModel.setSelectedFoodId(position)
+                this.pageViewModel.changePage("DESC_FOOD")
+            }
+            //Set onClick listener when item delete button icon in the list was clicked
+            this.binding.ibTrashFood.setOnClickListener {
+                Toast.makeText(this.view.context, "Delete ${this.foodListViewModel.getFoodAt(position)?.getName()}", Toast.LENGTH_SHORT).show()
+                //Delete food item from list
+                this.foodListViewModel.deleteFoodAt(position)
             }
         }
     }

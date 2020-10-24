@@ -34,7 +34,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
         this.binding = FragmentEditFoodBinding.inflate(inflater, container, false)
         //Instantiate Food list ViewModel
         this.foodListViewModel = activity?.run {
-            ViewModelProvider(this).get(FoodListViewModel::class.java)
+            ViewModelFactory().createViewModel(this, application, FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
         //Instantiate Page list ViewModel
         this.pageViewModel = activity?.run {
@@ -49,10 +49,8 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
         this.pageViewModel.changeTitle("Edit Makanan")
         //Observe SelectedFoodId changes
         this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
-            //Get list of foods
-            val foods = this.foodListViewModel.getFoods().value
-            //Get current selected food
-            val food = foods?.get(this.pageViewModel.getSelectedFoodId().value!!)
+            //Get current selected food from ViewModel
+            val food = this.foodListViewModel.getFoods().value?.get(it)
             //When Food Found, update UI, if not back to prev page
             if(food != null) {
                 this.updateUI(food)
@@ -114,11 +112,5 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
         this.binding.etEditFoodRestaurants.setText("")
         this.binding.etEditFoodSteps.setText("")
         this.binding.etEditFoodTags.setText("")
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        if(!hidden) {
-            pageViewModel.changeTitle("Edit Makanan")
-        }
     }
 }

@@ -40,7 +40,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         this.binding = FragmentFoodListBinding.inflate(inflater, container, false)
         //Instantiate viewModel
         this.foodListViewModel = activity?.run {
-            ViewModelProvider(this).get(FoodListViewModel::class.java)
+            ViewModelFactory().createViewModel(this, application, FoodListViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
         this.pageViewModel = activity?.run {
             ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
@@ -48,7 +48,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         //Instantiate array of Food
         this.foods = this.foodListViewModel.getFoods().value!!
         //Instantiate ListView Adapter
-        this.adapter = FoodListAdapter(activity!!, this.foods, this.pageViewModel)
+        this.adapter = FoodListAdapter(activity!!, this.foods, this.pageViewModel, this.foodListViewModel)
 
         //Return fragment view
         return this.binding.root
@@ -111,29 +111,6 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         //If no keyword, return back the listView items
         else {
             this.adapter.update(this.foods)
-        }
-    }
-
-    //Function to filter list by search keyword
-    private fun filterByName(keyword: String) {
-        //Check empty keyword
-        if(keyword != "" || keyword.isNotEmpty()) {
-            //Filtering array of food with custom function
-            val newFoodList = this.foods.filter { food ->
-                food.getName().contains(keyword, true)
-            }
-            //Then update it to adapter, but no need update existing array of food
-            this.adapter.update(newFoodList)
-        }
-        //If no keyword, return back the listView items
-        else {
-            this.adapter.update(this.foods)
-        }
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        if(!hidden) {
-            pageViewModel.changeTitle("Menu")
         }
     }
 }
