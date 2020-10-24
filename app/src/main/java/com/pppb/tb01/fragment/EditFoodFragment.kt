@@ -65,11 +65,14 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
             //Get selected item id
             val id = this.pageViewModel.getSelectedFoodId().value
             //Create tmp Food based on current selected item id
-            val newFood = Food(this.binding.etEditFoodName.text.toString().trim(), this.binding.etEditFoodDesc.text.toString().trim())
-                newFood.setIngredients(this.binding.etEditFoodIngredients.text.toString().trim().split("\n"))
-                newFood.setTags(this.binding.etEditFoodTags.text.toString().trim().split("\n"))
-                newFood.setSteps(this.binding.etEditFoodSteps.text.toString().trim().split("\n"))
-                newFood.setRestaurants(this.binding.etEditFoodRestaurants.text.toString().trim().split("\n"))
+            val newFood = Food(
+                this.binding.etEditFoodName.text.toString().trim(),
+                this.binding.etEditFoodDesc.text.toString().trim(),
+                this.binding.etEditFoodTags.text.toString().trim().split("\n"),
+                this.binding.etEditFoodIngredients.text.toString().trim().split("\n"),
+                this.binding.etEditFoodSteps.text.toString().trim().split("\n"),
+                this.binding.etEditFoodRestaurants.text.toString().trim().split("\n")
+            )
             //Update Array of Food in ViewModel with newly edited Food
             this.foodListViewModel.setFoodById(newFood, id!!)
             //Reset text input

@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.pppb.tb01.databinding.ComponentMenuItemBinding
 import com.pppb.tb01.model.Menu
+import com.pppb.tb01.utils.Utils
+import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
 
 class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewModel: PageViewModel) : ArrayAdapter<Menu>(context, 0, data) {
@@ -28,7 +31,7 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewMo
 
         if (convertView == null) {
             itemView = ComponentMenuItemBinding.inflate(LayoutInflater.from(this.view)).root
-            viewHolder = ViewHolder(itemView, pageViewModel)
+            viewHolder = ViewHolder(itemView, this.pageViewModel)
             itemView.tag = viewHolder
         } else {
             itemView = convertView
@@ -40,7 +43,7 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewMo
         return itemView
     }
 
-    private class ViewHolder(view: View,  private val pageViewModel: PageViewModel) {
+    private class ViewHolder(private val view: View, private val pageViewModel: PageViewModel) {
         private val binding: ComponentMenuItemBinding = ComponentMenuItemBinding.bind(view)
 
         fun updateView(menu: Menu) {
@@ -49,11 +52,11 @@ class MenuListAdapter(context: Context, data: List<Menu>, private val pageViewMo
             //Listener when Clicked Menu
             this.binding.menuList.setOnClickListener{
                 when(menu.getId()) {
-                    1 -> pageViewModel.changePage("HOME")
-                    2 -> {}
-                    3 -> pageViewModel.changePage("LIST_FOOD")
-                    4 -> pageViewModel.changePage("SETTING")
-                    5 -> {}
+                    1 -> this.pageViewModel.changePage("HOME")
+                    2 -> this.pageViewModel.startRandomizer()
+                    3 -> this.pageViewModel.changePage("LIST_FOOD")
+                    4 -> this.pageViewModel.changePage("SETTING")
+                    5 -> this.pageViewModel.exitApplication()
                     else -> {
                         Log.d("DEBUG", "BTN CLICK")
                     }

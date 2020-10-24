@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.pppb.tb01.R
 import com.pppb.tb01.adapter.FoodListAdapter
 import com.pppb.tb01.databinding.FragmentFoodListBinding
 import com.pppb.tb01.model.Food
+import com.pppb.tb01.utils.Utils
 import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
 import com.pppb.tb01.viewmodel.ViewModelFactory
@@ -66,6 +66,7 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         //Button "Cari" for search/ filtering current food list listener
         this.binding.btnSearch.setOnClickListener{
             this.filterByTagsOrIngredients(this.binding.etSearch.text.toString().trim())
+            Utils.hideSoftKeyBoard(context!!, view)
         }
 
         //Listener when user typing on search EditText
@@ -103,7 +104,8 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
         if(keyword != "" || keyword.isNotEmpty()) {
             //Filtering array of food with custom function
             val newFoodList = this.foods.filter { food ->
-                food.getTags().any { it.contains(keyword, true) } || food.getIngredients().any { it.contains(keyword, true) }
+                food.getTags().any { it.contains(keyword, true) } || food.getIngredients().any { it.contains(
+                    keyword, true) }
             }
             //Then update it to adapter, but no need update existing array of food
             this.adapter.update(newFoodList)

@@ -1,6 +1,7 @@
 package com.pppb.tb01
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,6 +9,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.pppb.tb01.databinding.ActivityMainBinding
 import com.pppb.tb01.fragment.*
+import com.pppb.tb01.utils.Utils
+import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
 import com.pppb.tb01.viewmodel.ViewModelFactory
 
@@ -23,14 +26,11 @@ class MainActivity : AppCompatActivity() {
     private val settingFragment: SettingFragment = SettingFragment.newInstance()
     //viewModel
     private lateinit var pageViewModel: PageViewModel
+    private lateinit var foodListViewModel: FoodListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //Instantiate ViewModel with ViewModelFactory
-        this.pageViewModel = ViewModelFactory().createViewModel(
-            this,
-            application,
-            PageViewModel::class.java
-        )
+        this.pageViewModel = ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
         //Change Theme When Activity Starts
         this.changeTheme(this.pageViewModel.getPreferredTheme().value!!)
         super.onCreate(savedInstanceState)
@@ -38,26 +38,39 @@ class MainActivity : AppCompatActivity() {
         //Instantiate ViewBinding
         this.binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
-
+        //Instantiate Food ViewModel
+        this.foodListViewModel = ViewModelFactory().createViewModel(this, application, FoodListViewModel::class.java)
         //Create Custom ToolBar
         this.setSupportActionBar(this.binding.toolbar)
 
         //Observe LeftDrawer toggle state
         this.pageViewModel.getLeftDrawerState().observe(this, {
             //When FALSE Close Drawer
-            if (!it) {
-                this.binding.drawerLayout.closeDrawers()
-            }
+            this.binding.drawerLayout.closeDrawers()
         })
         //Observe Page state
         this.pageViewModel.getPage().observe(this, {
             //Update Page
-            changePage(it)
+            this.changePage(it)
+        })
+        //Observe Food Randomizer
+        this.pageViewModel.getRandomizerState().observe(this, {
+            //Start Randomizer
+            if(it) {
+                this.displayRandomFood()
+            }
+        })
+        //Observe Exit State
+        this.pageViewModel.getExitState().observe(this, {
+            //Exit App
+            if(it) {
+                this.exit()
+            }
         })
         //Observe ToolbarTitle state
         this.pageViewModel.getTitle().observe(this, {
             //Update Title
-            changeTitle(it)
+            this.changeTitle(it)
         })
 
         //Creating burger navigation button
@@ -137,6 +150,22 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until fm.backStackEntryCount) {
             fm.popBackStack()
         }
+    }
+
+    private fun displayRandomFood() {
+        val rand = Utils.getRandomNumberFromFoodList(this.foodListViewModel.getFoods().value!!)
+        if(rand > -1) {
+            this.pageViewModel.setSelectedFoodId(rand)
+            this.pageViewModel.changePage("DESC_FOOD")
+        }
+        else {
+            Toast.makeText(this,"No Food found at Menu, Please insert some :3", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun exit() {
+        this.moveTaskToBack(true)
+        this.finish()
     }
 }
 

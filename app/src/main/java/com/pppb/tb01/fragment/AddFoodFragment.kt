@@ -51,11 +51,14 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         //Button "ADD" method listener
         this.binding.btnAdd.setOnClickListener{
             //Create tmp Food
-            val newFood = Food(this.binding.etAddFoodName.text.toString().trim(), this.binding.etAddFoodDesc.text.toString().trim())
-                newFood.setIngredients(this.binding.etAddFoodIngredients.text.toString().trim().split("\n"))
-                newFood.setTags(this.binding.etAddFoodTags.text.toString().trim().split("\n"))
-                newFood.setSteps(this.binding.etAddFoodSteps.text.toString().trim().split("\n"))
-                newFood.setRestaurants(this.binding.etAddFoodRestaurants.text.toString().trim().split("\n"))
+            val newFood = Food(
+                this.binding.etAddFoodName.text.toString().trim(),
+                this.binding.etAddFoodDesc.text.toString().trim(),
+                this.binding.etAddFoodTags.text.toString().trim().split("\n"),
+                this.binding.etAddFoodIngredients.text.toString().trim().split("\n"),
+                this.binding.etAddFoodSteps.text.toString().trim().split("\n"),
+                this.binding.etAddFoodRestaurants.text.toString().trim().split("\n")
+            )
             //Add tmp Food to ViewModel
             this.foodListViewModel.addFood(newFood)
             //Clear EditText input

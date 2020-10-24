@@ -5,7 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pppb.tb01.model.Food
+import com.pppb.tb01.storage.FoodListData
 import com.pppb.tb01.storage.ViewStorage
+import com.pppb.tb01.utils.Utils
 
 class FoodListViewModel(application: Application): AndroidViewModel(application) {
     private val foodList: MutableList<Food> = mutableListOf()
@@ -13,11 +15,12 @@ class FoodListViewModel(application: Application): AndroidViewModel(application)
     private val storage: ViewStorage = ViewStorage(application)
 
     init {
-        this.update()
         this.foodList.addAll(storage.getFoodList())
+        this.importFoodList()
+        this.update()
     }
 
-    fun getFoods() = foods as LiveData<List<Food>>
+    fun getFoods() = this.foods as LiveData<List<Food>>
 
     fun getFoodAt(index: Int) = this.foods.value?.get(index)
 
@@ -39,11 +42,29 @@ class FoodListViewModel(application: Application): AndroidViewModel(application)
         this.updateStorage()
     }
 
+    fun reImportFoodList() {
+        this.foodList.addAll(FoodListData.getInitialFoodList())
+        this.update()
+        this.updateStorage()
+    }
+
+    fun clearFood() {
+        this.foodList.clear()
+        this.storage.clearFoodList()
+    }
+
     private fun update() {
         this.foods.value = this.foodList
     }
 
     private fun updateStorage() {
-        storage.saveFoodList(this.foods.value!!)
+        this.storage.saveFoodList(this.foods.value!!)
+    }
+
+    private fun importFoodList() {
+        if(!this.storage.hasImportedFoodList()) {
+            this.reImportFoodList()
+            this.storage.setHasImportFoodList()
+        }
     }
 }

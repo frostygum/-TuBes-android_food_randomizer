@@ -24,7 +24,9 @@
     <string name="btn_editFood_update">Save</string>
     <string name="et_search_list_hint">cari makanan apa ?</string>
 
-    <string name="themeSet">Toggle Dark Theme</string>
+    <string name="tv_setting_theme">Toggle Dark Theme</string>
+    <string name="tv_setting_import">Reimport Food Menu List</string>
+    <string name="tv_setting_clear_food">Clear All Food Menu</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>
 

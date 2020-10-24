@@ -7,13 +7,17 @@
     android:padding="@dimen/marginLayout"
     >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/themeSet"
+            android:text="@string/tv_setting_theme"
             android:textSize="15sp"
             android:layout_marginEnd="15dp"
             />
@@ -22,6 +26,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_setting_import"
+            android:textSize="15sp"
+            android:layout_marginEnd="15dp"
+            />
+        <ImageButton
+            android:id="@+id/btn_reimport_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_import"
+            android:paddingVertical="15dp"
+            android:contentDescription="@string/tv_setting_import"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_setting_clear_food"
+            android:textSize="15sp"
+            android:layout_marginEnd="15dp"
+            />
+        <ImageButton
+            android:id="@+id/btn_clear_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_delete"
+            android:paddingVertical="15dp"
+            android:contentDescription="@string/tv_setting_clear_food"
             />
     </LinearLayout>
 </LinearLayout>

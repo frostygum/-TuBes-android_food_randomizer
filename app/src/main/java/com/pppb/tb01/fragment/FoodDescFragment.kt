@@ -71,8 +71,8 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         this.binding.tvDesc.text = food.getDescriptions()
         this.binding.tvTags.text = processArrayToLine(food.getTags())
         this.binding.tvBahan.text = processArrayToLines(food.getIngredients())
-        this.binding.tvLangkah.text = processArrayToLines(food.getSteps())
-        this.binding.tvResto.text = processArrayToLines(food.getRestaurants())
+        this.binding.tvLangkah.text = processArrayToLines(food.getSteps(), true)
+        this.binding.tvResto.text = processArrayToLine(food.getRestaurants())
     }
 
     //Method to process Array od String to Coma Separated String
@@ -89,13 +89,23 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
     }
 
     //Method to process Array od String to Multiline String
-    private fun processArrayToLines(arr: List<String>): String {
+    private fun processArrayToLines(arr: List<String>, withNumber: Boolean = false): String {
         var str = ""
         for((i, item) in arr.withIndex()) {
             str += if(i < arr.size - 1) {
-                "$item\n"
+                if(withNumber) {
+                    "${i+1}. $item\n"
+                }
+                else {
+                    "$item\n"
+                }
             } else {
-                item
+                if(withNumber) {
+                    "${i+1}. $item"
+                }
+                else {
+                    item
+                }
             }
         }
         return str

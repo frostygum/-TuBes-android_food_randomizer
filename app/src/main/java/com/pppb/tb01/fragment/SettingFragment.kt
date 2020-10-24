@@ -9,12 +9,14 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.pppb.tb01.R
 import com.pppb.tb01.databinding.FragmentSettingBinding
+import com.pppb.tb01.viewmodel.FoodListViewModel
 import com.pppb.tb01.viewmodel.PageViewModel
 import com.pppb.tb01.viewmodel.ViewModelFactory
 
 class SettingFragment: Fragment(R.layout.fragment_setting) {
     private lateinit var binding: FragmentSettingBinding
     private lateinit var pageViewModel: PageViewModel
+    private lateinit var foodListViewModel: FoodListViewModel
 
     companion object {
         fun newInstance(): SettingFragment {
@@ -29,6 +31,10 @@ class SettingFragment: Fragment(R.layout.fragment_setting) {
     ): View? {
         //Instantiate ViewBinding
         this.binding = FragmentSettingBinding.inflate(inflater, container, false)
+
+        this.foodListViewModel = activity?.run {
+            ViewModelFactory().createViewModel(this, application, FoodListViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
 
         this.pageViewModel = activity?.run {
             ViewModelFactory().createViewModel(this, application, PageViewModel::class.java)
@@ -53,6 +59,17 @@ class SettingFragment: Fragment(R.layout.fragment_setting) {
             this.binding.btnToggleTheme.setOnCheckedChangeListener { _, isChecked ->
                 this.pageViewModel.changePreferredTheme(isChecked)
                 Toast.makeText(activity, "App Restart Required to make changes", Toast.LENGTH_SHORT).show()
+            }
+
+            this.binding.btnReimportFood.setOnClickListener{
+                this.foodListViewModel.reImportFoodList()
+                Toast.makeText(activity, "Success Re-Import Default Food Menu List", Toast.LENGTH_SHORT).show()
+                this.pageViewModel.changePage("LIST_FOOD")
+            }
+
+            this.binding.btnClearFood.setOnClickListener{
+                this.foodListViewModel.clearFood()
+                Toast.makeText(activity, "Success Clear Food Menu List", Toast.LENGTH_SHORT).show()
             }
         })
     }
