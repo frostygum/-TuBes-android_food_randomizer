@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity() {
                 ft.addToBackStack(tag)
             }
         }
+
+        ft.commit()
     }
 
     private fun changePage(pageName: String) {
