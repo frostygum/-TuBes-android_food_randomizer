@@ -18,6 +18,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
     private lateinit var binding: FragmentEditFoodBinding
     private lateinit var foodListViewModel: FoodListViewModel
     private lateinit var pageViewModel: PageViewModel
+    private var currentFoodId: Int = 0
 
     companion object {
         fun newInstance(): EditFoodFragment {
@@ -48,10 +49,11 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
         //Set Toolbar title for current Fragment
         this.pageViewModel.changeTitle("Edit Makanan")
         //Observe SelectedFoodId changes
-        this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
+        this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {foodId ->
             //Get current selected food from ViewModel
-            val food = this.foodListViewModel.getFoods().value?.get(it)
-            //When Food Found, update UI, if not back to prev page
+            this.currentFoodId = foodId
+            val food = this.foodListViewModel.getFoods().value?.filter { it.getId() == foodId }?.get(0)
+            //When Food found, create UI, if not change to prev page
             if(food != null) {
                 this.updateUI(food)
             }
@@ -62,10 +64,9 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
 
         //Button "SAVE" method listener
         this.binding.btnSave.setOnClickListener{
-            //Get selected item id
-            val id = this.pageViewModel.getSelectedFoodId().value
             //Create tmp Food based on current selected item id
             val newFood = Food(
+                this.currentFoodId,
                 this.binding.etEditFoodName.text.toString().trim(),
                 this.binding.etEditFoodDesc.text.toString().trim(),
                 this.binding.etEditFoodTags.text.toString().trim().split("\n"),
@@ -74,7 +75,7 @@ class EditFoodFragment: Fragment(R.layout.fragment_edit_food) {
                 this.binding.etEditFoodRestaurants.text.toString().trim().split("\n")
             )
             //Update Array of Food in ViewModel with newly edited Food
-            this.foodListViewModel.setFoodById(newFood, id!!)
+            this.foodListViewModel.setFoodById(newFood, this.currentFoodId)
             //Reset text input
             this.resetForm()
             //Close Keyboard

@@ -65,7 +65,7 @@ class FoodListAdapter(context: Context, data: List<Food>, private val pageViewMo
             //Set onClick listener when item in the list was clicked
             this.binding.foodItem.setOnClickListener{
                 //Set current selected to viewModel then change fragment
-                this.pageViewModel.setSelectedFoodId(position)
+                this.pageViewModel.setSelectedFoodId(food.getId())
                 this.pageViewModel.changePage("DESC_FOOD")
             }
             //Set onClick listener when item delete button icon in the list was clicked

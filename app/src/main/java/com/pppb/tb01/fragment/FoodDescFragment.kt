@@ -1,6 +1,7 @@
 package com.pppb.tb01.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,9 +49,8 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
         //Change toolbar title for current fragment
         this.pageViewModel.changeTitle("Makanan")
         //Observe changes SelectedFoodId
-        this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {
-            //Get Food at current SelectedFoodId from ViewModel
-            val food = this.foodListViewModel.getFoods().value?.get(it)
+        this.pageViewModel.getSelectedFoodId().observe(viewLifecycleOwner, {foodId ->
+            val food = this.foodListViewModel.getFoods().value?.filter { it.getId() == foodId }?.get(0)
             //When Food found, create UI, if not change to prev page
             if(food != null) {
                 this.updateUI(food)
@@ -59,6 +59,7 @@ class FoodDescFragment() : Fragment(R.layout.fragment_food_desc) {
                 pageViewModel.changePage("LIST_FOOD")
             }
         })
+
         //Button "Pencil" method listener
         this.binding.btnEditFood.setOnClickListener{
             this.pageViewModel.changePage("EDIT_FOOD")

@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     private fun displayRandomFood() {
         val rand = Utils.getRandomNumberFromFoodList(this.foodListViewModel.getFoods().value!!)
         if(rand > -1) {
-            this.pageViewModel.setSelectedFoodId(rand)
+            this.pageViewModel.setSelectedFoodId(this.foodListViewModel.getFoodAt(rand)!!.getId())
             this.pageViewModel.changePage("DESC_FOOD")
         }
         else {

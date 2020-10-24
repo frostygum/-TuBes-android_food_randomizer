@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import com.pppb.tb01.model.Food
 import com.pppb.tb01.storage.FoodListData
 import com.pppb.tb01.storage.ViewStorage
-import com.pppb.tb01.utils.Utils
 
 class FoodListViewModel(application: Application): AndroidViewModel(application) {
     private val foodList: MutableList<Food> = mutableListOf()
@@ -25,7 +24,9 @@ class FoodListViewModel(application: Application): AndroidViewModel(application)
     fun getFoodAt(index: Int) = this.foods.value?.get(index)
 
     fun addFood(food: Food) {
-        this.foodList.add(food)
+        val newFood: Food = food
+        newFood.setId(this.foodList.size + 1)
+        this.foodList.add(newFood)
         this.update()
         this.updateStorage()
     }
@@ -37,13 +38,25 @@ class FoodListViewModel(application: Application): AndroidViewModel(application)
     }
 
     fun setFoodById(food: Food, id: Int) {
-        this.foodList[id] = food
+        var location = 0
+        //get index location for current id
+        for((i, it) in this.foodList.withIndex()){
+            if(it.getId() == id) {
+                location = i
+                break
+            }
+        }
+        this.foodList[location] = food
         this.update()
         this.updateStorage()
     }
 
     fun reImportFoodList() {
-        this.foodList.addAll(FoodListData.getInitialFoodList())
+        FoodListData.getInitialFoodList().forEach { food ->
+            val newFood: Food = food
+            newFood.setId(this.foodList.size)
+            this.foodList.add(newFood)
+        }
         this.update()
         this.updateStorage()
     }

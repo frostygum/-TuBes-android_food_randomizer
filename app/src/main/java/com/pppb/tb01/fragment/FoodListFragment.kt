@@ -104,8 +104,15 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
 
         //Button "Cari" for search/ filtering current food list listener
         this.binding.btnSearch.setOnClickListener{
-            this.filterByTagsOrIngredients(this.binding.etSearch.text.toString().trim())
+            val keyword = this.binding.etSearch.text.toString().trim()
+            //Clear search EditText
+            this.binding.etSearch.setText("")
+            //Filter list
+            this.filterByTagsOrIngredients(keyword)
+            //Hide soft keyboard
             Utils.hideSoftKeyBoard(context!!, view)
+            //Remove ListView Footer
+            this.binding.lvListFood.removeFooterView(this.listViewFooter)
         }
 
         //Listener when user typing on search EditText
