@@ -307,6 +307,6 @@ object FoodListData {
                 "Nasi Campur 88",
                 "Se'i Babi Lelebo"
             )
-        ),
+        )
     )
 }
