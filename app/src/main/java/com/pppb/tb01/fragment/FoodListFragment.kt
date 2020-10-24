@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.pppb.tb01.R
@@ -96,6 +97,11 @@ class FoodListFragment() : Fragment(R.layout.fragment_food_list) {
 
         //Set for current adapter
         this.binding.lvListFood.adapter = this.adapter
+        //Create ListView Footer
+        val listFooter = View(this.context);
+        listFooter.layoutParams = AbsListView.LayoutParams(AbsListView.LayoutParams.WRAP_CONTENT, 370)
+        //Set Footer to listView
+        this.binding.lvListFood.addFooterView(listFooter);
     }
 
     //Function to filter list by search keyword
