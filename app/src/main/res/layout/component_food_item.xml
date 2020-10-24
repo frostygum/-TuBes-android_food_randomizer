@@ -25,5 +25,6 @@
         android:src="@drawable/icon_delete"
         android:paddingVertical="15dp"
         android:contentDescription="@string/trash_desc"
+        android:tint="?attr/colorPrimary"
         />
 </LinearLayout>

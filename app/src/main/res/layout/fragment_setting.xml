@@ -50,6 +50,7 @@
             android:src="@drawable/icon_import"
             android:paddingVertical="15dp"
             android:contentDescription="@string/tv_setting_import"
+            android:tint="?attr/colorPrimary"
             />
     </LinearLayout>
     <LinearLayout
@@ -74,6 +75,7 @@
             android:src="@drawable/icon_delete"
             android:paddingVertical="15dp"
             android:contentDescription="@string/tv_setting_clear_food"
+            android:tint="?attr/colorPrimary"
             />
     </LinearLayout>
 </LinearLayout>

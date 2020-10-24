@@ -188,6 +188,125 @@ object FoodListData {
                 "Starbucks",
                 "Bawean"
             )
-        )
+        ),
+        Food(
+            "\uD83D\uDC14 Asian Orange Chicken",
+            "A delicious citrus chicken recipe with flavors reminiscent of the orange chicken from a popular restaurant in the mall. ",
+            listOf<String>("Asian", "Chicken", "Lunch"),
+            listOf<String>(
+                "1 ½ cups water ",
+                "2 tablespoons orange juice",
+                "¼ cup lemon juice",
+                "⅓ cup rice vinegar",
+                "2 ½ tablespoons soy sauce",
+                "1 tablespoon grated orange zest",
+                "1 cup packed brown sugar",
+                "½ teaspoon minced fresh ginger root",
+                "½ teaspoon minced garlic",
+                "2 tablespoons chopped green onion",
+                "¼ teaspoon red pepper flakes",
+                "3 tablespoons cornstarch",
+                "2 tablespoons water",
+                "2 breast half, bone and skin removed (blank)s boneless, skinless chicken breasts, cut into 1/2 inch pieces",
+                "1 cup all-purpose flour",
+                "¼ teaspoon salt",
+                "¼ teaspoon pepper",
+                "3 tablespoons olive oil"
+            ),
+            listOf<String>(
+                "Pour 1 1/2 cups water, orange juice, lemon juice, rice vinegar, and soy sauce into a saucepan and set over medium-high heat. Stir in the orange zest, brown sugar, ginger, garlic, chopped onion, and red pepper flakes. Bring to a boil. Remove from heat, and cool 10 to 15 minutes.",
+                "Place the chicken pieces into a resealable plastic bag. When contents of saucepan have cooled, pour 1 cup of sauce into bag. Reserve the remaining sauce. Seal the bag, and refrigerate at least 2 hours.",
+                "In another resealable plastic bag, mix the flour, salt, and pepper. Add the marinated chicken pieces, seal the bag, and shake to coat.",
+                "Heat the olive oil in a large skillet over medium heat. Place chicken into the skillet, and brown on both sides. Drain on a plate lined with paper towels, and cover with aluminum foil.",
+                "Wipe out the skillet, and add the sauce. Bring to a boil over medium-high heat. Mix together the cornstarch and 2 tablespoons water; stir into the sauce. Reduce heat to medium low, add the chicken pieces, and simmer, about 5 minutes, stirring occasionally."
+            ),
+            listOf<String>(
+                "Panda Express",
+                "Atmosphere Resrt Cafe",
+                "The Stone Cafe",
+                "Hotel Padma Bandung"
+            )
+        ),
+        Food(
+            "\uD83E\uDD5A Egg Rolls",
+            "These are fabulous as a side dish with stir-fry dishes. Serve warm with egg roll sauce or soy sauce if desired. ",
+            listOf<String>("Asian", "Egg", "Dessert", "Appetizer"),
+            listOf<String>(
+                "1 pound ground pork",
+                "1 teaspoon ground ginger",
+                "1 teaspoon garlic powder",
+                "1 quart peanut oil for frying",
+                "2 tablespoons all-purpose flour",
+                "2 tablespoons water",
+                "2 cups shredded cabbage",
+                "2 ounces shredded carrots",
+                "8 (7 inch square) egg roll wrappers",
+                "2 tablespoons sesame seeds"
+            ),
+            listOf<String>(
+                "Season pork with ginger and garlic powder and mix thoroughly. Heat mixture in a medium skillet, stirring, until pork is cooked through and no longer pink. Set aside.",
+                "In another large skillet heat oil to about 375 degrees F (190 degrees C) or medium high heat. While oil is heating, combine flour and water in a bowl until they form a paste. In a separate bowl combine the cabbage, carrots and reserved pork mixture. Mix all together.",
+                "Lay out one egg roll skin with a corner pointed toward you. Place about a 1/4 to 1/3 cup of the cabbage, carrot and pork mixture on egg roll paper and fold corner up over the mixture. Fold left and right corners toward the center and continue to roll. Brush a bit of the flour paste on the final corner to help seal the egg roll.",
+                "Place egg rolls into heated oil and fry, turning occasionally, until golden brown. Remove from oil and drain on paper towels or rack. Put on serving plate and top with sesame seeds if desired."
+            ),
+            listOf<String>(
+                "The Stone Cafe",
+                "ButterCup",
+                "jardin Cafe"
+            )
+        ),
+        Food(
+            "\uD83E\uDD69 Beef Bulgogi",
+            "Just like my Korean mom makes it! It's delicious! Even better if rolled up in red leaf lettuce with rice and hot pepper paste. If you want to spice it up just add red pepper powder to your marinade. ",
+            listOf<String>("Asian", "Korean", "Beef", "Lunch"),
+            listOf<String>(
+                "1 pound flank steak, thinly sliced",
+                "5 tablespoons soy sauce",
+                "2 ½ tablespoons white sugar",
+                "¼ cup chopped green onion",
+                "2 tablespoons minced garlic",
+                "2 tablespoons sesame seeds",
+                "2 tablespoons sesame oil",
+                "½ teaspoon ground black pepper"
+            ),
+            listOf<String>(
+                "Place the beef in a shallow dish. Combine soy sauce, sugar, green onion, garlic, sesame seeds, sesame oil, and ground black pepper in a small bowl. Pour over beef. Cover and refrigerate for at least 1 hour or overnight.",
+                "Preheat an outdoor grill for high heat, and lightly oil the grate.",
+                "Quickly grill beef on hot grill until slightly charred and cooked through, 1 to 2 minutes per side."
+            ),
+            listOf<String>(
+                "Braga Permai",
+                "Mujigae"
+            )
+        ),
+        Food(
+            "\uD83D\uDC16 Char Siu (Chinese BBQ Pork)",
+            "\"Char siu\" literally means \"fork roast\" - \"char\" being \"fork\" (both noun and verb) and \"siu\" being \"roast\" - after the traditional cooking method for the dish: long strips of seasoned boneless pork are skewered with long forks and placed in a covered oven or over a fire. This is best cooked over charcoal, but it's important to cook with indirect heat. ",
+            listOf<String>("tag", "tag", "tag", "tag"),
+            listOf<String>(
+                "2 eaches pork tenderloins",
+                "½ cup soy sauce",
+                "⅓ cup honey",
+                "⅓ cup ketchup",
+                "⅓ cup brown sugar",
+                "¼ cup Chinese rice wine",
+                "2 tablespoons hoisin sauce",
+                "½ teaspoon red food coloring",
+                "1 teaspoon Chinese five-spice powder "
+            ),
+            listOf<String>(
+                "Cut pork with the grain into strips 1 1/2- to 2-inches long; put into a large resealable plastic bag.",
+                "Stir soy sauce, honey, ketchup, brown sugar, rice wine, hoisin sauce, red food coloring or red bean curd (see Cook's Note), and Chinese five-spice powder together in a saucepan over medium-low heat. Cook and stir until just combined and slightly warm, 2 to 3 minutes. Pour the marinade into the bag with the pork, squeeze air from the bag, and seal. Turn bag a few times to coat all pork pieces in marinade.",
+                "Marinate pork in refrigerator, 2 hours to overnight.",
+                "Preheat an outdoor grill for medium-high heat and lightly oil the grate.",
+                "Remove pork from marinade and shake to remove excess liquid. Discard remaining marinade.",
+                "Cook pork on preheated grill for 20 minutes. Put a small container of water onto the grill and continue cooking, turning the pork regularly, until cooked through, about 1 hour. An instant-read thermometer inserted into the center should read at least 145 degrees F (63 degrees C)."
+            ),
+            listOf<String>(
+                "Kantin Qiu",
+                "Nasi Campur 88",
+                "Se'i Babi Lelebo"
+            )
+        ),
     )
 }
